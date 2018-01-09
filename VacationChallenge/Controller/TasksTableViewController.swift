@@ -38,6 +38,19 @@ class TasksTableViewController: UITableViewController {
             return 0
         }
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Active tasks"
+        case 1:
+            return "Tasks in progress"
+        case 2:
+            return "Tasks to be started"
+        default:
+            return ""
+        }
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

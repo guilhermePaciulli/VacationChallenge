@@ -32,7 +32,7 @@
         <!--Tasks-->
         <scene sceneID="HL2-Z9-4uL">
             <objects>
-                <tableViewController title="Tasks" id="Dtw-96-OQW" sceneMemberID="viewController">
+                <tableViewController title="Tasks" id="Dtw-96-OQW" customClass="TasksTableViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yrd-P2-5d3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="1709.5999999999999" y="4.9475262368815596"/>
         </scene>
-        <!--View Controller-->
+        <!--New Task View Controller-->
         <scene sceneID="sAH-XX-18E">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="ThG-fT-uda" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="ThG-fT-uda" customClass="NewTaskViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Afd-2d-VFV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,10 +208,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyI-nR-G2P">
                                         <rect key="frame" x="0.0" y="355.5" width="150" height="32"/>
                                         <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="ThG-fT-uda" eventType="touchUpInside" id="4kv-4d-UDa"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LP7-be-AoN">
                                         <rect key="frame" x="150" y="355.5" width="150" height="32"/>
                                         <state key="normal" title="Create"/>
+                                        <connections>
+                                            <action selector="createButtonTapped:" destination="ThG-fT-uda" eventType="touchUpInside" id="koh-j9-7va"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -256,6 +262,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WVu-SD-ySN"/>
                     </view>
+                    <connections>
+                        <outlet property="deadlinePickerView" destination="JDx-3H-nAq" id="6c4-09-ZZo"/>
+                        <outlet property="popUpView" destination="3Kn-Ss-i1C" id="u2I-NL-bvN"/>
+                        <outlet property="taskTitleTextField" destination="B7W-gq-hCa" id="U0d-E4-UXM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kB-61-ThF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
