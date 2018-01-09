@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */; };
+		BD91A113200529F100A03CC2 /* WorkHour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */; };
+		BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */; };
+		BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */; };
+		BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11620052A5D00A03CC2 /* DatabaseController.swift */; };
 		BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA566320039C0900986EF6 /* AppDelegate.swift */; };
 		BDAA566620039C0900986EF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA566520039C0900986EF6 /* ViewController.swift */; };
 		BDAA566920039C0900986EF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDAA566720039C0900986EF6 /* Main.storyboard */; };
@@ -35,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD91A11620052A5D00A03CC2 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		BDAA566020039C0900986EF6 /* VacationChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VacationChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAA566320039C0900986EF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDAA566520039C0900986EF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +149,7 @@
 				BDAA566D20039C0900986EF6 /* Assets.xcassets */,
 				BDAA567220039C0900986EF6 /* Info.plist */,
 				BDAA566320039C0900986EF6 /* AppDelegate.swift */,
+				BD91A11620052A5D00A03CC2 /* DatabaseController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -155,6 +166,10 @@
 		BDAA569720039E2B00986EF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */,
+				BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */,
+				BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */,
+				BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */,
 				BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */,
 			);
 			path = Model;
@@ -294,9 +309,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */,
 				BDAA566620039C0900986EF6 /* ViewController.swift in Sources */,
 				BDAA566C20039C0900986EF6 /* VacationChallenge.xcdatamodeld in Sources */,
 				BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */,
+				BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */,
+				BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */,
+				BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */,
+				BD91A113200529F100A03CC2 /* WorkHour+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
