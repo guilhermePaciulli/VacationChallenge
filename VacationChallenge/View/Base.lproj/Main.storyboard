@@ -38,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="begunTaskCell" rowHeight="67" id="gsQ-iK-cpf">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="begunTaskCell" rowHeight="67" id="gsQ-iK-cpf" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gsQ-iK-cpf" id="yna-eH-dac">
@@ -57,6 +57,9 @@
                                             <state key="normal" title="Stop">
                                                 <color key="titleColor" red="0.82980685763888884" green="0.28934330769589411" blue="0.30595253410331719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="stopTask:" destination="gsQ-iK-cpf" eventType="touchUpInside" id="CSt-1j-XQs"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -71,7 +74,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="unbegunTaskCell" rowHeight="67" id="2T4-Bw-wdx">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="unbegunTaskCell" rowHeight="67" id="2T4-Bw-wdx" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="95" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2T4-Bw-wdx" id="CTS-8X-epg">
@@ -90,6 +93,9 @@
                                             <state key="normal" title="Start">
                                                 <color key="titleColor" red="0.14615885416666666" green="0.84054904513888884" blue="0.45460704799220608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="startTask:" destination="2T4-Bw-wdx" eventType="touchUpInside" id="yHo-Qg-xXz"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -104,7 +110,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="continueTaskCell" rowHeight="67" id="4T0-de-4kR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="continueTaskCell" rowHeight="67" id="4T0-de-4kR" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="162" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4T0-de-4kR" id="K3p-vT-vti">
@@ -123,6 +129,9 @@
                                             <state key="normal" title="Continue">
                                                 <color key="titleColor" red="0.14615885419999999" green="0.4624294704472221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="continueTask:" destination="4T0-de-4kR" eventType="touchUpInside" id="Sbt-h5-0Jy"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -194,7 +203,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDx-3H-nAq" userLabel="Task deadline input">
-                                        <rect key="frame" x="15" y="195.5" width="270" height="128"/>
+                                        <rect key="frame" x="15" y="195" width="270" height="128"/>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyI-nR-G2P">
                                         <rect key="frame" x="0.0" y="355.5" width="150" height="32"/>
