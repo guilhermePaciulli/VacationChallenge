@@ -99,13 +99,10 @@
 		BDAA566220039C0900986EF6 /* VacationChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				BDAA566320039C0900986EF6 /* AppDelegate.swift */,
-				BDAA566520039C0900986EF6 /* ViewController.swift */,
-				BDAA566720039C0900986EF6 /* Main.storyboard */,
-				BDAA566D20039C0900986EF6 /* Assets.xcassets */,
-				BDAA566F20039C0900986EF6 /* LaunchScreen.storyboard */,
-				BDAA567220039C0900986EF6 /* Info.plist */,
-				BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */,
+				BDAA569520039DF800986EF6 /* Other */,
+				BDAA569420039DD700986EF6 /* Controller */,
+				BDAA569620039E0500986EF6 /* View */,
+				BDAA569720039E2B00986EF6 /* Model */,
 			);
 			path = VacationChallenge;
 			sourceTree = "<group>";
@@ -126,6 +123,41 @@
 				BDAA568820039C0A00986EF6 /* Info.plist */,
 			);
 			path = VacationChallengeUITests;
+			sourceTree = "<group>";
+		};
+		BDAA569420039DD700986EF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA566520039C0900986EF6 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BDAA569520039DF800986EF6 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA566D20039C0900986EF6 /* Assets.xcassets */,
+				BDAA567220039C0900986EF6 /* Info.plist */,
+				BDAA566320039C0900986EF6 /* AppDelegate.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BDAA569620039E0500986EF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA566F20039C0900986EF6 /* LaunchScreen.storyboard */,
+				BDAA566720039C0900986EF6 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BDAA569720039E2B00986EF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,7 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VLLH384AC4;
-				INFOPLIST_FILE = VacationChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VacationChallenge/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.mackMobile.vacationChallenge.VacationChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -447,7 +479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VLLH384AC4;
-				INFOPLIST_FILE = VacationChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VacationChallenge/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.mackMobile.vacationChallenge.VacationChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
