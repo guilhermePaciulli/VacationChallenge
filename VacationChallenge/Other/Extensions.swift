@@ -55,3 +55,11 @@ extension UIView {
         layer.add(animation, forKey: "shake")
     }
 }
+
+extension UIColor {
+    
+    convenience init(red: Int, green: Int, blue: Int, alpha: Double) {
+        self.init(red: red / 255, green: green / 255, blue: blue / 255, alpha: alpha)
+    }
+    
+}

@@ -16,6 +16,8 @@
 		BD91A11B200555A400A03CC2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11A200555A400A03CC2 /* Extensions.swift */; };
 		BD91A11D2005594300A03CC2 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11C2005594300A03CC2 /* TaskTableViewCell.swift */; };
 		BD91A11F20055D0B00A03CC2 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11E20055D0B00A03CC2 /* NewTaskViewController.swift */; };
+		BD91A1232006913600A03CC2 /* TaskDeadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A1222006913600A03CC2 /* TaskDeadline.swift */; };
+		BD91A1252006934F00A03CC2 /* SingleTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A1242006934F00A03CC2 /* SingleTaskTableViewController.swift */; };
 		BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA566320039C0900986EF6 /* AppDelegate.swift */; };
 		BDAA566920039C0900986EF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDAA566720039C0900986EF6 /* Main.storyboard */; };
 		BDAA566C20039C0900986EF6 /* VacationChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */; };
@@ -52,6 +54,8 @@
 		BD91A11A200555A400A03CC2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BD91A11C2005594300A03CC2 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		BD91A11E20055D0B00A03CC2 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		BD91A1222006913600A03CC2 /* TaskDeadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDeadline.swift; sourceTree = "<group>"; };
+		BD91A1242006934F00A03CC2 /* SingleTaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskTableViewController.swift; sourceTree = "<group>"; };
 		BDAA566020039C0900986EF6 /* VacationChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VacationChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAA566320039C0900986EF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDAA566820039C0900986EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				BD91A118200553EB00A03CC2 /* TasksTableViewController.swift */,
+				BD91A1242006934F00A03CC2 /* SingleTaskTableViewController.swift */,
 				BD91A11C2005594300A03CC2 /* TaskTableViewCell.swift */,
 				BD91A11E20055D0B00A03CC2 /* NewTaskViewController.swift */,
 			);
@@ -179,6 +184,7 @@
 				BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */,
 				BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */,
 				BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */,
+				BD91A1222006913600A03CC2 /* TaskDeadline.swift */,
 				BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */,
 			);
 			path = Model;
@@ -319,12 +325,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD91A119200553EB00A03CC2 /* TasksTableViewController.swift in Sources */,
+				BD91A1252006934F00A03CC2 /* SingleTaskTableViewController.swift in Sources */,
 				BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */,
 				BD91A11D2005594300A03CC2 /* TaskTableViewCell.swift in Sources */,
 				BD91A11F20055D0B00A03CC2 /* NewTaskViewController.swift in Sources */,
 				BDAA566C20039C0900986EF6 /* VacationChallenge.xcdatamodeld in Sources */,
 				BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */,
 				BD91A11B200555A400A03CC2 /* Extensions.swift in Sources */,
+				BD91A1232006913600A03CC2 /* TaskDeadline.swift in Sources */,
 				BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */,
 				BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */,
 				BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */,

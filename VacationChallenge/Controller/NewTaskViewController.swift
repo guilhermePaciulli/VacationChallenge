@@ -18,19 +18,7 @@ class NewTaskViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
     
     var taskTableViewController: UITableViewController?
     
-    let pickerValues =  [TaskDeadlinePickerValue(title: "1 hour",  hours: 1),
-                         TaskDeadlinePickerValue(title: "2 hours", hours: 2),
-                         TaskDeadlinePickerValue(title: "3 hours", hours: 3),
-                         TaskDeadlinePickerValue(title: "4 hours", hours: 4),
-                         TaskDeadlinePickerValue(title: "5 hours", hours: 5),
-                         TaskDeadlinePickerValue(title: "6 hours", hours: 6),
-                         TaskDeadlinePickerValue(title: "7 hours", hours: 7),
-                         TaskDeadlinePickerValue(title: "1 day (8 hours)",   hours: 8),
-                         TaskDeadlinePickerValue(title: "2 days (16 hours)", hours: 16),
-                         TaskDeadlinePickerValue(title: "3 days (24 hours)", hours: 24),
-                         TaskDeadlinePickerValue(title: "4 days (32 hours)", hours: 32),
-                         TaskDeadlinePickerValue(title: "1 week (40 hours)",  hours: 40),
-                         TaskDeadlinePickerValue(title: "2 weeks (80 hours)", hours: 80)]
+    let pickerValues = TaskDeadline.options
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,10 +80,5 @@ extension NewTaskViewController {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerValues[row].title
-    }
-    
-    struct TaskDeadlinePickerValue {
-        var title: String
-        var hours: Int
     }
 }
