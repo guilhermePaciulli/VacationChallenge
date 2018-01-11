@@ -21,16 +21,16 @@ class SingleTaskTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = self.task.title
-        if self.task.rating == 0 {
+        self.reloadTaskOverview()
+    }
+    
+    public func reloadTaskOverview() {
+        if !self.task.isComplete() {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
                                                                      style: .plain,
                                                                      target: self,
                                                                      action: #selector(editWorkHours))
         }
-        self.reloadTaskOverview()
-    }
-    
-    public func reloadTaskOverview() {
         self.workHours = self.task.workHours?.array as! [WorkHour]
         self.workHours.reverse()
         self.tableView.reloadData()
@@ -65,7 +65,7 @@ class SingleTaskTableViewController: UITableViewController {
             } else if indexPath.row == 1 {
                 reuseId = "estimatedTimeCell"
             } else if indexPath.row == 2 {
-                if self.task.rating == 0 {
+                if self.task.isComplete() {
                     reuseId = "taskGradeCell"
                 } else {
                     reuseId = self.task.isActive() ? "stopActionsCell" : "startActionsCell"
@@ -102,7 +102,7 @@ class SingleTaskTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = String(describing: (task.hoursWorked * 100) / 100) + " Hours"
             } else if indexPath.row == 1 {
                 cell.detailTextLabel?.text = String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
-            } else if indexPath.row == 2 && self.task.rating != 0 {
+            } else if indexPath.row == 2 && self.task.isComplete() {
                 var rating = String(describing: (task.rating * 100) / 100)
                 var ratingColor = UIColor.black
                 if task.rating < 6 {
@@ -124,9 +124,11 @@ class SingleTaskTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let workHour = self.workHours[indexPath.row]
+        if workHour.finished == nil { return }
         if indexPath.section == 1 {
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "editWorkHourViewController") as? EditWorkHourViewController {
-                viewController.workHour = self.workHours[indexPath.row]
+                viewController.workHour = workHour
                 viewController.tableView = self
                 self.present(viewController, animated: true, completion: nil)
             }

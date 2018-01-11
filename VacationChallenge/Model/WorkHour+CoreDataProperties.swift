@@ -28,13 +28,23 @@ extension WorkHour {
         return workHour
     }
     
+    public func updateWorkHour(by hour: Double) {
+        self.task?.hoursWorked -= self.hoursSpent
+        self.hoursSpent = hour
+        self.finished = Calendar.current.date(byAdding: .hour,
+                                                       value: Int(self.hoursSpent),
+                                                       to: self.finished! as Date)! as NSDate
+        self.task?.hoursWorked += self.hoursSpent
+        DatabaseController.shared.saveContext()
+    }
+    
     public func stop() {
         if self.finished != nil { return }
         self.finished = NSDate()
         let calendar = Calendar.current
         let dateResults = calendar.dateComponents([.year, .month, .day, .hour, .minute],
-                                                  from: self.finished! as Date,
-                                                  to: self.started! as Date)
+                                                  from: self.started! as Date,
+                                                  to: self.finished! as Date)
         self.hoursSpent = Double(dateResults.year!)  * 8.640 +
             Double(dateResults.month!) *   720 +
             Double(dateResults.day!)   *    24 +

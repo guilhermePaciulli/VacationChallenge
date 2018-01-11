@@ -31,6 +31,7 @@ class TasksTableViewController: UITableViewController {
         
         let allTasks = Task.fetchAll()
         for task in allTasks {
+            if task.isComplete() { continue }
             if task.isActive() {
                 self.begunTasks.append(task)
             } else if task.hasStarted() {

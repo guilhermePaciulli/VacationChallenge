@@ -26,12 +26,7 @@ class EditWorkHourViewController: UIViewController, UIPickerViewDelegate, UIPick
         hoursWorkedPicker.delegate = self
     }
     @IBAction func setButtonTapped(_ sender: Any) {
-        self.workHour.task?.hoursWorked -= self.workHour.hoursSpent
-        self.workHour.hoursSpent = Double(self.hoursWorkedPicker.selectedRow(inComponent: 0))
-        self.workHour.finished = Calendar.current.date(byAdding: .hour,
-                                                       value: Int(self.workHour.hoursSpent),
-                                                       to: self.workHour.finished! as Date)! as NSDate
-        self.workHour.task?.hoursWorked += self.workHour.hoursSpent
+        self.workHour.updateWorkHour(by: Double(self.hoursWorkedPicker.selectedRow(inComponent: 0)))
         self.dismiss(animated: true, completion: {
             self.tableView.reloadTaskOverview()
         })
@@ -53,7 +48,7 @@ extension EditWorkHourViewController {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return  "\(row) hours"
+        return row != 1 ? "\(row) hours" : "1 hour"
     }
     
 }

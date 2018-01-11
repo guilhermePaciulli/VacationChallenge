@@ -42,7 +42,7 @@ extension Task {
     }
     
     public func start() {
-        if self.rating != 0 { return }
+        if self.isComplete() { return }
         if let last = self.workHours?.array.last as? WorkHour {
             if last.finished == nil { return }
         }
@@ -51,7 +51,7 @@ extension Task {
     }
     
     public func stop() {
-        if self.rating != 0 { return }
+        if self.isComplete() { return }
         if let last = self.workHours?.array.last as? WorkHour {
             if last.finished != nil { return }
             last.stop()
@@ -74,12 +74,17 @@ extension Task {
         return false
     }
     
+    public func isComplete() -> Bool {
+        return self.rating != 0.0
+    }
+    
     public func complete() {
-        if self.rating != 0 { return }
+        if self.isComplete(){ return }
         self.stop()
         let diff = self.hoursWorked - self.hoursDeadline
         let grade = 10 / ((diff * diff) +  1)
         self.rating = Double(round(grade * 100) / 100)
+        DatabaseController.shared.saveContext()
     }
 
     @NSManaged public var title: String?
