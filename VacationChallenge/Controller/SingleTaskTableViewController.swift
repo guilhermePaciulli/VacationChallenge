@@ -30,6 +30,8 @@ class SingleTaskTableViewController: UITableViewController {
                                                                      style: .plain,
                                                                      target: self,
                                                                      action: #selector(editWorkHours))
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
         self.workHours = self.task.workHours?.array as! [WorkHour]
         self.workHours.reverse()
@@ -103,7 +105,7 @@ class SingleTaskTableViewController: UITableViewController {
             } else if indexPath.row == 1 {
                 cell.detailTextLabel?.text = String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
             } else if indexPath.row == 2 && self.task.isComplete() {
-                var rating = String(describing: (task.rating * 100) / 100)
+                var rating = String(describing: (task.rating * 100) / 100) + " - "
                 var ratingColor = UIColor.black
                 if task.rating < 6 {
                     rating += "You need to improve"
