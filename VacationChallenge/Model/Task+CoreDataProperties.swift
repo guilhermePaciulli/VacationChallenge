@@ -40,6 +40,32 @@ extension Task {
         DatabaseController.shared.saveContext()
 
     }
+    
+    public func start() {
+        if self.rating != 0 { return }
+        if let last = self.workHours?.array.last as? WorkHour {
+            if last.finished == nil { return }
+        }
+        self.addToWorkHours(WorkHour.startWorking(to: self))
+        DatabaseController.shared.saveContext()
+    }
+    
+    public func stop() {
+        if self.rating != 0 { return }
+        if let last = self.workHours?.array.last as? WorkHour {
+            if last.finished != nil { return }
+            last.stop()
+            DatabaseController.shared.saveContext()
+        }
+    }
+    
+    public func complete() {
+        if self.rating != 0 { return }
+        self.stop()
+        let diff = self.hoursWorked - self.hoursDeadline
+        let grade = 10 / ((diff * diff) +  1)
+        self.rating = Double(round(grade * 100) / 100)
+    }
 
     @NSManaged public var title: String?
     @NSManaged public var hoursDeadline: Double

@@ -24,18 +24,22 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     @IBAction func stopTask(_ sender: UIButton) {
+        self.cellTask.stop()
         tableViewController.reloadTasks()
     }
     
     @IBAction func startTask(_ sender: UIButton) {
+        self.cellTask.start()
         tableViewController.reloadTasks()
     }
     
     @IBAction func continueTask(_ sender: UIButton) {
+        self.cellTask.start()
         tableViewController.reloadTasks()
     }
     
     @objc func completeTask() {
+        self.cellTask.complete()
         tableViewController.reloadTasks()
     }
 }
