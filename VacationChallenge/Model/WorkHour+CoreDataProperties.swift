@@ -46,6 +46,13 @@ extension WorkHour {
         DatabaseController.shared.saveContext()
     }
     
+    public func delete() {
+        self.task?.hoursWorked -= self.hoursSpent
+        DatabaseController.shared.saveContext()
+        DatabaseController.shared.persistentContainer.viewContext.delete(self)
+        DatabaseController.shared.saveContext()
+    }
+    
     @NSManaged public var started: NSDate?
     @NSManaged public var finished: NSDate?
     @NSManaged public var hoursSpent: Double

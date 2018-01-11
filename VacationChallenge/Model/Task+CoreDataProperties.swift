@@ -59,6 +59,21 @@ extension Task {
         }
     }
     
+    public func hasStarted() -> Bool {
+        if let workHours = self.workHours?.array {
+            return workHours.isEmpty
+        }
+        return false
+    }
+    
+    public func isActive() -> Bool {
+        if !hasStarted() { return false }
+        if let last = self.workHours?.array.last as? WorkHour {
+            return last.finished == nil
+        }
+        return false
+    }
+    
     public func complete() {
         if self.rating != 0 { return }
         self.stop()

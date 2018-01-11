@@ -20,8 +20,20 @@ class SingleTaskTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _ = self.task.workHours?.map({ self.workHours.append($0 as! WorkHour) })
         self.title = self.task.title
+        if self.task.rating == 0 {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                                     style: .plain,
+                                                                     target: self,
+                                                                     action: #selector(editWorkHours))
+        }
+        self.reloadTaskOverview()
+    }
+    
+    public func reloadTaskOverview() {
+        self.workHours = self.task.workHours?.array as! [WorkHour]
+        self.workHours.reverse()
+        self.tableView.reloadData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,9 +49,6 @@ class SingleTaskTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if task.rating == 0 {
-                return 2
-            }
             return 3
         }
         return self.workHours.count == 0 ? 1 : self.workHours.count
@@ -55,8 +64,12 @@ class SingleTaskTableViewController: UITableViewController {
                 reuseId = "totalTimeSpentCell"
             } else if indexPath.row == 1 {
                 reuseId = "estimatedTimeCell"
-            } else {
-                reuseId = "taskGradeCell"
+            } else if indexPath.row == 2 {
+                if self.task.rating == 0 {
+                    reuseId = "taskGradeCell"
+                } else {
+                    reuseId = self.task.isActive() ? "stopActionsCell" : "startActionsCell"
+                }
             }
         }
         
@@ -89,7 +102,7 @@ class SingleTaskTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = String(describing: (task.hoursWorked * 100) / 100) + " Hours"
             } else if indexPath.row == 1 {
                 cell.detailTextLabel?.text = String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
-            } else {
+            } else if indexPath.row == 2 && self.task.rating != 0 {
                 var rating = String(describing: (task.rating * 100) / 100)
                 var ratingColor = UIColor.black
                 if task.rating < 6 {
@@ -110,14 +123,41 @@ class SingleTaskTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let workHourToBeDeleted = self.workHours[indexPath.row]
+            self.workHours.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            workHourToBeDeleted.delete()
+            self.reloadTaskOverview()
         }
     }
     
+    @objc func editWorkHours() {
+        self.tableView.isEditing = !self.tableView.isEditing
+    }
+    
+    @IBAction func startStopTask(_ sender: Any) {
+        if self.task.isActive() {
+            self.task.stop()
+        } else {
+            self.task.start()
+        }
+        self.reloadTaskOverview()
+    }
+    
+    @IBAction func completeTask(_ sender: Any) {
+        self.task.complete()
+        self.reloadTaskOverview()
+    }
 }

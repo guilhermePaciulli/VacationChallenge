@@ -31,18 +31,10 @@ class TasksTableViewController: UITableViewController {
         
         let allTasks = Task.fetchAll()
         for task in allTasks {
-            if let workHours = task.workHours {
-                if workHours.firstObject != nil {
-                    if let lastWorkHour = workHours.lastObject as? WorkHour {
-                        if lastWorkHour.finished == nil {
-                            self.begunTasks.append(task)
-                        } else {
-                            self.continueTasks.append(task)
-                        }
-                    }
-                } else {
-                    self.unbegunTasks.append(task)
-                }
+            if task.isActive() {
+                self.begunTasks.append(task)
+            } else if task.hasStarted() {
+                self.continueTasks.append(task)
             } else {
                 self.unbegunTasks.append(task)
             }
@@ -138,7 +130,7 @@ class TasksTableViewController: UITableViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
-        self.tableView.isEditing = true
+        self.tableView.isEditing = !self.tableView.isEditing
     }
     
 }
