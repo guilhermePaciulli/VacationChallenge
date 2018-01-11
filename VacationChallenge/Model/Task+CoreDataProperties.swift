@@ -16,6 +16,30 @@ extension Task {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
         return NSFetchRequest<Task>(entityName: "Task")
     }
+    
+    @nonobjc public class func fetchAll() -> [Task] {
+        do {
+            let entities = try DatabaseController.shared.persistentContainer.viewContext.fetch(self.fetchRequest())
+            if let tasks = entities as? [Task] {
+                return tasks
+            }
+        } catch {
+            fatalError("Failed to fetch beers: \(error)")
+        }
+        return []
+    }
+    
+    @nonobjc public class func newTask(title: String, hoursDeadline: Double) {
+        let entity = NSEntityDescription.insertNewObject(forEntityName: "Task",
+                                                         into: DatabaseController.shared.persistentContainer.viewContext)
+        if let task = entity as? Task {
+            task.title = title
+            task.hoursDeadline = hoursDeadline
+        }
+        
+        DatabaseController.shared.saveContext()
+
+    }
 
     @NSManaged public var title: String?
     @NSManaged public var hoursDeadline: Double

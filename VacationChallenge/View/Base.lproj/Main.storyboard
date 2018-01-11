@@ -73,6 +73,9 @@
                                         <constraint firstItem="MLY-TL-Kl5" firstAttribute="height" secondItem="yna-eH-dac" secondAttribute="height" multiplier="0.5" id="wN5-uX-0Ea"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskCellTitle" destination="omv-5I-xJa" id="AYr-qD-QBV"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="unbegunTaskCell" rowHeight="67" id="2T4-Bw-wdx" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="95" width="375" height="67"/>
@@ -109,6 +112,9 @@
                                         <constraint firstAttribute="trailing" secondItem="GZg-7D-eLx" secondAttribute="trailing" multiplier="1.4" id="srn-Gu-oca"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskCellTitle" destination="GZg-7D-eLx" id="HlH-ON-OEd"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="continueTaskCell" rowHeight="67" id="4T0-de-4kR" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="162" width="375" height="67"/>
@@ -145,6 +151,9 @@
                                         <constraint firstItem="5Yw-8b-raz" firstAttribute="width" secondItem="K3p-vT-vti" secondAttribute="width" multiplier="0.25" id="x4Z-ph-C4X"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskCellTitle" destination="QbR-Ma-tlK" id="ZDN-UR-9dH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

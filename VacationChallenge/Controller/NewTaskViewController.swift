@@ -41,14 +41,17 @@ class NewTaskViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
                 self.taskTitleTextField.shake()
                 return
             }
-//            Create Task Here
+            let selectedTaskDeadline = self.pickerValues[self.deadlinePickerView.selectedRow(inComponent: 0)]
+            Task.newTask(title: taskTitle, hoursDeadline: Double(selectedTaskDeadline.hours))
         } else {
             self.taskTitleTextField.shake()
             return
         }
         
         self.dismiss(animated: true, completion: {
-            self.taskTableViewController?.tableView.reloadData()
+            if let tasksTableViewController = self.taskTableViewController as? TasksTableViewController {
+                tasksTableViewController.reloadTasks()
+            }
         })
     }
     

@@ -15,56 +15,102 @@ class TasksTableViewController: UITableViewController {
     var unbegunTasks: [Task] = []
     
     var begunTasks: [Task] = []
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
+    var sections: [Sections] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.reloadTasks()
+    }
+    
+    func reloadTasks() {
+        self.continueTasks = []
+        self.begunTasks = []
+        self.unbegunTasks = []
+        self.sections = []
+        
+        let allTasks = Task.fetchAll()
+        for task in allTasks {
+            if let workHours = task.workHours {
+                if workHours.firstObject != nil {
+                    if let lastWorkHour = workHours.lastObject as? WorkHour {
+                        if lastWorkHour.finished == nil {
+                            self.begunTasks.append(task)
+                        } else {
+                            self.continueTasks.append(task)
+                        }
+                    }
+                } else {
+                    self.unbegunTasks.append(task)
+                }
+            } else {
+                self.unbegunTasks.append(task)
+            }
+        }
+        if self.begunTasks.count > 0 { self.sections.append(.begunTasks) }
+        if self.continueTasks.count > 0 { self.sections.append(.continueTasks) }
+        if self.unbegunTasks.count > 0 { self.sections.append(.unbegunTasks) }
+
+        self.tableView.reloadData()
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return self.sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return begunTasks.count
-        case 1:
-            return continueTasks.count
-        case 2:
-            return unbegunTasks.count
-        default:
-            return 0
+        switch self.sections[section] {
+        case .begunTasks:
+            return self.begunTasks.count
+        case .continueTasks:
+            return self.continueTasks.count
+        case .unbegunTasks:
+            return self.unbegunTasks.count
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Active tasks"
-        case 1:
-            return "Tasks in progress"
-        case 2:
-            return "Tasks to be started"
-        default:
-            return ""
-        }
+        return self.sections[section].rawValue
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        var reuseIdentifier = ""
+        var task: Task!
+        switch self.sections[indexPath.section] {
+        case .begunTasks:
+            reuseIdentifier = "begunTaskCell"
+            task = self.begunTasks[indexPath.row]
+        case .continueTasks:
+            reuseIdentifier = "continueTaskCell"
+            task = self.continueTasks[indexPath.row]
+        case .unbegunTasks:
+            reuseIdentifier = "unbegunTaskCell"
+            task = self.unbegunTasks[indexPath.row]
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        if let taskCell = cell as? TaskTableViewCell {
+            taskCell.cellTask = task
+            taskCell.taskCellTitle.text = task.title
+            taskCell.tableViewController = self
+        }
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "singleTaskViewController") as? SingleTaskTableViewController {
+            var task: Task!
+            switch self.sections[indexPath.section] {
+            case .begunTasks:
+                task = self.begunTasks[indexPath.row]
+            case .continueTasks:
+                task = self.continueTasks[indexPath.row]
+            case .unbegunTasks:
+                task = self.unbegunTasks[indexPath.row]
+            }
+            viewController.task = task
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 2 || indexPath.section == 1
@@ -76,4 +122,14 @@ class TasksTableViewController: UITableViewController {
         }
     }
 
+}
+
+extension TasksTableViewController {
+    
+    enum Sections: String {
+        case begunTasks = "Active tasks"
+        case unbegunTasks = "Tasks to be started"
+        case continueTasks = "Tasks in progress"
+    }
+    
 }

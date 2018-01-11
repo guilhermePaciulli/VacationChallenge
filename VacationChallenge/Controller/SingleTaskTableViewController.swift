@@ -13,35 +13,38 @@ class SingleTaskTableViewController: UITableViewController {
     var task: Task!
     
     var workHours: [WorkHour] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _ = self.task.workHours?.map({
-            let workHour = $0 as! WorkHour
-            if workHour.finished != nil {
-                self.workHours.append(workHour)
-            }
-        })
+        _ = self.task.workHours?.map({ self.workHours.append($0 as! WorkHour) })
+        self.title = self.task.title
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Task overview"
+        }
+        return "Task entry log"
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if task.rating == 0 { // This may be wrong
+            if task.rating == 0 {
                 return 2
             }
             return 3
         }
-        return self.workHours.count
+        return self.workHours.count == 0 ? 1 : self.workHours.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var reuseId = ""
         
@@ -61,14 +64,26 @@ class SingleTaskTableViewController: UITableViewController {
                                                  for: indexPath)
         
         if indexPath.section == 1 {
+            
+            if self.workHours.count == 0 {
+                cell.textLabel?.text = "Task not yet started!"
+                cell.detailTextLabel?.text = ""
+                return cell
+            }
+            
             let workHour = self.workHours[indexPath.row]
             cell.textLabel?.text = String(describing: (workHour.hoursSpent * 100) / 100) + " Hours"
-            let components = Calendar.current.dateComponents([.day, .month, .hour, .minute], from: workHour.finished! as Date)
-            let stringDay = String(describing: components.day)
-            let stringMonth = String(describing: components.month)
-            let stringMinute = String(describing: components.minute)
-            let stringHour = String(describing: components.minute)
-            cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
+            if let workHourFinishedDate = workHour.finished {
+                let components = Calendar.current.dateComponents([.day, .month, .hour, .minute], from: workHourFinishedDate as Date)
+                let stringDay = String(describing: components.day)
+                let stringMonth = String(describing: components.month)
+                let stringMinute = String(describing: components.minute)
+                let stringHour = String(describing: components.minute)
+                cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
+            } else {
+                cell.detailTextLabel?.text = "Running!"
+                cell.detailTextLabel?.textColor = UIColor.init(red: 30, green: 189, blue: 30, alpha: 1)
+            }
         } else {
             if indexPath.row == 0 {
                 cell.detailTextLabel?.text = String(describing: (task.hoursWorked * 100) / 100) + " Hours"
@@ -94,15 +109,15 @@ class SingleTaskTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1
     }
-
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
+    
 }

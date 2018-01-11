@@ -10,10 +10,12 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
     
-    var cellTask: Task?
+    var cellTask: Task!
     
-    var tableViewController: UITableViewController?
+    var tableViewController: TasksTableViewController!
 
+    @IBOutlet weak var taskCellTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let gestureRecognizer = UILongPressGestureRecognizer(target: self,
@@ -22,18 +24,18 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     @IBAction func stopTask(_ sender: UIButton) {
-        tableViewController?.tableView.reloadData()
+        tableViewController.reloadTasks()
     }
     
     @IBAction func startTask(_ sender: UIButton) {
-        tableViewController?.tableView.reloadData()
+        tableViewController.reloadTasks()
     }
     
     @IBAction func continueTask(_ sender: UIButton) {
-        tableViewController?.tableView.reloadData()
+        tableViewController.reloadTasks()
     }
     
     @objc func completeTask() {
-        tableViewController?.tableView.reloadData()
+        tableViewController.reloadTasks()
     }
 }
