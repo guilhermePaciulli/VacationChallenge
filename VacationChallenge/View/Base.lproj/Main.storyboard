@@ -521,20 +521,79 @@
             </objects>
             <point key="canvasLocation" x="2636" y="566.26686656671666"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Work Hour View Controller-->
         <scene sceneID="RAj-j6-B5M">
             <objects>
-                <viewController id="qfu-ij-5QC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editWorkHourViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qfu-ij-5QC" customClass="EditWorkHourViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qJJ-D8-rI5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48o-yB-V6Y">
+                                <rect key="frame" x="37" y="210" width="300" height="267"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8HJ-Na-Uoz">
+                                        <rect key="frame" x="15" y="67" width="270" height="133"/>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change hours worked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zT-mW-aD7">
+                                        <rect key="frame" x="0.0" y="5" width="300" height="35"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVg-Rx-Tdu">
+                                        <rect key="frame" x="0.0" y="224.5" width="150" height="40"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="qfu-ij-5QC" eventType="touchUpInside" id="edN-r7-vgg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaL-E9-wTI">
+                                        <rect key="frame" x="150" y="224" width="150" height="40"/>
+                                        <state key="normal" title="Set"/>
+                                        <connections>
+                                            <action selector="setButtonTapped:" destination="qfu-ij-5QC" eventType="touchUpInside" id="fM4-pY-p9x"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="iaL-E9-wTI" firstAttribute="height" secondItem="BVg-Rx-Tdu" secondAttribute="height" id="0OE-m9-QdC"/>
+                                    <constraint firstItem="8HJ-Na-Uoz" firstAttribute="height" secondItem="48o-yB-V6Y" secondAttribute="height" multiplier="0.5" id="50m-ks-u2X"/>
+                                    <constraint firstItem="BVg-Rx-Tdu" firstAttribute="width" secondItem="48o-yB-V6Y" secondAttribute="width" multiplier="0.5" id="BDn-zV-fWS"/>
+                                    <constraint firstItem="8HJ-Na-Uoz" firstAttribute="centerX" secondItem="48o-yB-V6Y" secondAttribute="centerX" id="BjE-IC-M3N"/>
+                                    <constraint firstItem="BVg-Rx-Tdu" firstAttribute="leading" secondItem="48o-yB-V6Y" secondAttribute="leading" id="EWH-GR-z1D"/>
+                                    <constraint firstItem="8HJ-Na-Uoz" firstAttribute="centerY" secondItem="48o-yB-V6Y" secondAttribute="centerY" id="FQv-hc-yJC"/>
+                                    <constraint firstItem="1zT-mW-aD7" firstAttribute="centerY" secondItem="48o-yB-V6Y" secondAttribute="centerY" multiplier="0.17" id="L4a-gM-WnG"/>
+                                    <constraint firstItem="BVg-Rx-Tdu" firstAttribute="centerY" secondItem="48o-yB-V6Y" secondAttribute="centerY" multiplier="1.83" id="Mcf-p4-lzo"/>
+                                    <constraint firstItem="1zT-mW-aD7" firstAttribute="width" secondItem="48o-yB-V6Y" secondAttribute="width" id="P9I-CL-gVV"/>
+                                    <constraint firstItem="iaL-E9-wTI" firstAttribute="centerY" secondItem="BVg-Rx-Tdu" secondAttribute="centerY" id="Xc5-sL-ecF"/>
+                                    <constraint firstItem="8HJ-Na-Uoz" firstAttribute="width" secondItem="48o-yB-V6Y" secondAttribute="width" multiplier="0.9" id="YdO-6M-EcN"/>
+                                    <constraint firstItem="1zT-mW-aD7" firstAttribute="centerX" secondItem="48o-yB-V6Y" secondAttribute="centerX" id="d6T-Pg-csf"/>
+                                    <constraint firstItem="BVg-Rx-Tdu" firstAttribute="height" secondItem="48o-yB-V6Y" secondAttribute="height" multiplier="0.15" id="lJb-Ol-gOK"/>
+                                    <constraint firstAttribute="trailing" secondItem="iaL-E9-wTI" secondAttribute="trailing" id="nMd-tV-zBh"/>
+                                    <constraint firstItem="iaL-E9-wTI" firstAttribute="width" secondItem="BVg-Rx-Tdu" secondAttribute="width" id="sx1-hl-0zM"/>
+                                    <constraint firstItem="1zT-mW-aD7" firstAttribute="height" secondItem="48o-yB-V6Y" secondAttribute="height" multiplier="0.13" id="xWw-sS-Lop"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.29743685787671231" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="48o-yB-V6Y" firstAttribute="width" secondItem="qJJ-D8-rI5" secondAttribute="width" multiplier="0.8" id="HJ4-dc-grn"/>
+                            <constraint firstItem="48o-yB-V6Y" firstAttribute="centerX" secondItem="X2x-Vo-zIc" secondAttribute="centerX" id="Jeb-N6-Bzd"/>
+                            <constraint firstItem="48o-yB-V6Y" firstAttribute="height" secondItem="qJJ-D8-rI5" secondAttribute="height" multiplier="0.4" id="S3D-Lm-RHF"/>
+                            <constraint firstItem="48o-yB-V6Y" firstAttribute="centerY" secondItem="X2x-Vo-zIc" secondAttribute="centerY" id="dQN-AD-nkg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="X2x-Vo-zIc"/>
                     </view>
+                    <connections>
+                        <outlet property="hoursWorkedPicker" destination="8HJ-Na-Uoz" id="uRS-j7-qva"/>
+                        <outlet property="popUpView" destination="48o-yB-V6Y" id="q1E-fj-S5T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vaq-0g-Btw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3447" y="566"/>
+            <point key="canvasLocation" x="3445.5999999999999" y="565.36731634182911"/>
         </scene>
         <!--Results-->
         <scene sceneID="BiW-iF-PvG">

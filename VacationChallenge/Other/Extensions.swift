@@ -58,8 +58,11 @@ extension UIView {
 
 extension UIColor {
     
-    convenience init(red: Int, green: Int, blue: Int, alpha: Double) {
-        self.init(red: red / 255, green: green / 255, blue: blue / 255, alpha: alpha)
+    static func colorFromRGB(red: Int, green: Int, blue: Int, alpha: Double) -> UIColor {
+        return UIColor(red: CGFloat(red / 255),
+                       green: CGFloat(green / 255),
+                       blue: CGFloat(blue / 255),
+                       alpha: CGFloat(alpha))
     }
     
 }

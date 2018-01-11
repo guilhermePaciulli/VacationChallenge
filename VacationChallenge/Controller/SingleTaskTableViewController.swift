@@ -95,7 +95,7 @@ class SingleTaskTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
             } else {
                 cell.detailTextLabel?.text = "Running!"
-                cell.detailTextLabel?.textColor = UIColor.init(red: 30, green: 189, blue: 30, alpha: 1)
+                cell.detailTextLabel?.textColor = UIColor.colorFromRGB(red: 30, green: 189, blue: 30, alpha: 1)
             }
         } else {
             if indexPath.row == 0 {
@@ -107,13 +107,13 @@ class SingleTaskTableViewController: UITableViewController {
                 var ratingColor = UIColor.black
                 if task.rating < 6 {
                     rating += "You need to improve"
-                    ratingColor = UIColor.init(red: 214, green: 13, blue: 13, alpha: 1)
+                    ratingColor = UIColor.colorFromRGB(red: 214, green: 13, blue: 13, alpha: 1)
                 } else if task.rating < 8 {
                     rating += "Good! But you can do better"
-                    ratingColor = UIColor.init(red: 224, green: 224, blue: 7, alpha: 1)
+                    ratingColor = UIColor.colorFromRGB(red: 224, green: 224, blue: 7, alpha: 1)
                 } else {
                     rating += "Awesome! Keep up the good work"
-                    ratingColor = UIColor.init(red: 30, green: 189, blue: 30, alpha: 1)
+                    ratingColor = UIColor.colorFromRGB(red: 30, green: 189, blue: 30, alpha: 1)
                 }
                 cell.detailTextLabel?.text = rating
                 cell.detailTextLabel?.textColor = ratingColor
@@ -125,7 +125,11 @@ class SingleTaskTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "editWorkHourViewController") as? EditWorkHourViewController {
+                viewController.workHour = self.workHours[indexPath.row]
+                viewController.tableView = self
+                self.present(viewController, animated: true, completion: nil)
+            }
         }
     }
     

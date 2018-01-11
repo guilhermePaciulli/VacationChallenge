@@ -61,7 +61,7 @@ extension Task {
     
     public func hasStarted() -> Bool {
         if let workHours = self.workHours?.array {
-            return workHours.isEmpty
+            return !workHours.isEmpty
         }
         return false
     }
