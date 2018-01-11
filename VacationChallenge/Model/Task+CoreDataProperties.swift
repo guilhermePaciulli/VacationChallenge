@@ -24,7 +24,7 @@ extension Task {
                 return tasks
             }
         } catch {
-            fatalError("Failed to fetch beers: \(error)")
+            fatalError("Failed to fetch tasks: \(error)")
         }
         return []
     }

@@ -75,10 +75,10 @@ class SingleTaskTableViewController: UITableViewController {
             cell.textLabel?.text = String(describing: (workHour.hoursSpent * 100) / 100) + " Hours"
             if let workHourFinishedDate = workHour.finished {
                 let components = Calendar.current.dateComponents([.day, .month, .hour, .minute], from: workHourFinishedDate as Date)
-                let stringDay = String(describing: components.day)
-                let stringMonth = String(describing: components.month)
-                let stringMinute = String(describing: components.minute)
-                let stringHour = String(describing: components.minute)
+                let stringDay = String(describing: components.day!)
+                let stringMonth = String(describing: components.month!)
+                let stringMinute = String(describing: components.minute!)
+                let stringHour = String(describing: components.hour!)
                 cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
             } else {
                 cell.detailTextLabel?.text = "Running!"

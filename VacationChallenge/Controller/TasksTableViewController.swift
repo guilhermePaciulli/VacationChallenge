@@ -113,15 +113,34 @@ class TasksTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 2 || indexPath.section == 1
+        return self.sections[indexPath.section] == .unbegunTasks || self.sections[indexPath.section] == .continueTasks
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            var task: Task!
+            switch self.sections[indexPath.section] {
+            case .begunTasks:
+                task = self.begunTasks[indexPath.row]
+                self.begunTasks.remove(at: indexPath.row)
+            case .continueTasks:
+                task = self.continueTasks[indexPath.row]
+                self.continueTasks.remove(at: indexPath.row)
+            case .unbegunTasks:
+                task = self.unbegunTasks[indexPath.row]
+                self.unbegunTasks.remove(at: indexPath.row)
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
+            DatabaseController.shared.persistentContainer.viewContext.delete(task)
+            DatabaseController.shared.saveContext()
+            self.reloadTasks()
         }
     }
-
+    
+    @IBAction func editButtonPressed(_ sender: Any) {
+        self.tableView.isEditing = true
+    }
+    
 }
 
 extension TasksTableViewController {

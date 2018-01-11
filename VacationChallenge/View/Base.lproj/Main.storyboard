@@ -162,7 +162,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="waM-2r-5N6">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="edit" id="2Fz-gi-xHY"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="edit" id="2Fz-gi-xHY">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="Dtw-96-OQW" id="N7f-Nb-0xT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QM1-pI-5Hn">
                             <connections>
                                 <segue destination="ThG-fT-uda" kind="popoverPresentation" popoverAnchorBarButtonItem="QM1-pI-5Hn" id="WSq-hA-2NT">
@@ -174,7 +178,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puy-vw-cCr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709.5999999999999" y="4.9475262368815596"/>
+            <point key="canvasLocation" x="1710" y="5"/>
         </scene>
         <!--New Task View Controller-->
         <scene sceneID="sAH-XX-18E">
@@ -279,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kB-61-ThF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2636" y="-605"/>
+            <point key="canvasLocation" x="1710" y="-914"/>
         </scene>
         <!--Results-->
         <scene sceneID="8n4-qu-neP">
