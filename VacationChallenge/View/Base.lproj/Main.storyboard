@@ -597,7 +597,7 @@
         <scene sceneID="BiW-iF-PvG">
             <objects>
                 <navigationController id="2Zu-vt-YcZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Results" id="uNE-Tx-7Lg"/>
+                    <tabBarItem key="tabBarItem" title="Results" image="resultsTabBarIcon" id="uNE-Tx-7Lg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vg6-Do-b7A">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -614,7 +614,7 @@
         <scene sceneID="gHB-J8-nDz">
             <objects>
                 <navigationController id="hQS-gi-IXx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tasks" id="sZi-70-vYC"/>
+                    <tabBarItem key="tabBarItem" title="Tasks" image="tasksTabBarIcon" id="sZi-70-vYC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nWl-nS-uJh">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -628,4 +628,8 @@
             <point key="canvasLocation" x="761" y="5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="resultsTabBarIcon" width="20" height="20"/>
+        <image name="tasksTabBarIcon" width="20" height="20"/>
+    </resources>
 </document>
