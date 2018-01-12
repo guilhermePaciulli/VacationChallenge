@@ -26,6 +26,7 @@
 		BDAA567C20039C0A00986EF6 /* VacationChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA567B20039C0A00986EF6 /* VacationChallengeTests.swift */; };
 		BDAA568720039C0A00986EF6 /* VacationChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA568620039C0A00986EF6 /* VacationChallengeUITests.swift */; };
 		BDB75CE92007CAEC00EA7E30 /* EditWorkHourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB75CE82007CAEC00EA7E30 /* EditWorkHourViewController.swift */; };
+		BDB75CEB2007EA6600EA7E30 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB75CEA2007EA6600EA7E30 /* ResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		BDAA568620039C0A00986EF6 /* VacationChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationChallengeUITests.swift; sourceTree = "<group>"; };
 		BDAA568820039C0A00986EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDB75CE82007CAEC00EA7E30 /* EditWorkHourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkHourViewController.swift; sourceTree = "<group>"; };
+		BDB75CEA2007EA6600EA7E30 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				BD91A11C2005594300A03CC2 /* TaskTableViewCell.swift */,
 				BD91A11E20055D0B00A03CC2 /* NewTaskViewController.swift */,
 				BDB75CE82007CAEC00EA7E30 /* EditWorkHourViewController.swift */,
+				BDB75CEA2007EA6600EA7E30 /* ResultsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */,
 				BD91A11B200555A400A03CC2 /* Extensions.swift in Sources */,
 				BD91A1232006913600A03CC2 /* TaskDeadline.swift in Sources */,
+				BDB75CEB2007EA6600EA7E30 /* ResultsTableViewController.swift in Sources */,
 				BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */,
 				BDB75CE92007CAEC00EA7E30 /* EditWorkHourViewController.swift in Sources */,
 				BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */,
