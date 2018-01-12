@@ -288,7 +288,7 @@
         <!--Results-->
         <scene sceneID="8n4-qu-neP">
             <objects>
-                <tableViewController id="6uT-Ud-NQr" sceneMemberID="viewController">
+                <tableViewController id="6uT-Ud-NQr" customClass="ResultsTableViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hnE-gl-0PX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -317,9 +317,7 @@
                             <outlet property="delegate" destination="6uT-Ud-NQr" id="uQE-Gf-HeT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Results" id="gCl-ni-dnE">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="6XP-bV-uAn"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Results" id="gCl-ni-dnE"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ta-YE-IJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

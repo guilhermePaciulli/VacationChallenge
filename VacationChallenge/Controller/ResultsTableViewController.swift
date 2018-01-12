@@ -14,7 +14,7 @@ class ResultsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,6 +24,7 @@ class ResultsTableViewController: UITableViewController {
     
     public func reloadTasks() {
         self.completedTasks = Task.fetchAll().filter({ $0.isComplete() })
+        self.tableView.reloadData()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,10 +36,9 @@ class ResultsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        
-        
+        let cell = UITableViewCell()
+        cell.textLabel?.text = self.completedTasks[indexPath.row].title
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 

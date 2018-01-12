@@ -79,11 +79,10 @@ extension Task {
     }
     
     public func complete() {
-        if self.isComplete(){ return }
+        if self.isComplete() { return }
         self.stop()
-        let diff = self.hoursWorked - self.hoursDeadline
-        let grade = 10 / ((diff * diff) +  1)
-        self.rating = Double(round(grade * 100) / 100)
+        let escaled = (10 * self.hoursWorked) / self.hoursDeadline
+        self.rating = Double(round(escaled * 100)) / 100
         DatabaseController.shared.saveContext()
     }
 

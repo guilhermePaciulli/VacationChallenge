@@ -126,9 +126,9 @@ class SingleTaskTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let workHour = self.workHours[indexPath.row]
-        if workHour.finished == nil { return }
         if indexPath.section == 1 {
+            let workHour = self.workHours[indexPath.row]
+            if workHour.finished == nil { return }
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "editWorkHourViewController") as? EditWorkHourViewController {
                 viewController.workHour = workHour
                 viewController.tableView = self
