@@ -14,6 +14,8 @@ class TaskTableViewCell: UITableViewCell {
     
     var tableViewController: TasksTableViewController!
 
+    @IBOutlet weak var continueButtonOutlet: UIButton!
+    
     @IBOutlet weak var taskCellTitle: UILabel!
     
     override func awakeFromNib() {

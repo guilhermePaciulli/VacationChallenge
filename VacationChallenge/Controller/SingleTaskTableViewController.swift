@@ -16,6 +16,7 @@ class SingleTaskTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.2100759341, blue: 0.04853530163, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +31,7 @@ class SingleTaskTableViewController: UITableViewController {
                                                                      style: .plain,
                                                                      target: self,
                                                                      action: #selector(editWorkHours))
+            self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 1, green: 0.2100759341, blue: 0.04853530163, alpha: 1)
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }
@@ -97,7 +99,7 @@ class SingleTaskTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
             } else {
                 cell.detailTextLabel?.text = "Running!"
-                cell.detailTextLabel?.textColor = UIColor.colorFromRGB(red: 30, green: 189, blue: 30, alpha: 1)
+                cell.detailTextLabel?.textColor = UIColor.init(red: 30.0/255.0, green: 189.0/255.0, blue: 30.0/255.0, alpha: 1)
             }
         } else {
             if indexPath.row == 0 {
@@ -106,19 +108,20 @@ class SingleTaskTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
             } else if indexPath.row == 2 && self.task.isComplete() {
                 var rating = String(describing: (task.rating * 100) / 100) + " - "
-                var ratingColor = UIColor.black
+                var ratingColor: UIColor?
                 if task.rating < 6 {
                     rating += "You need to improve"
-                    ratingColor = UIColor.colorFromRGB(red: 214, green: 13, blue: 13, alpha: 1)
+                    ratingColor = UIColor.init(red: 214.0/255.0, green: 13.0/255.0, blue: 13.0/255.0, alpha: 1)
                 } else if task.rating < 8 {
                     rating += "Good! But you can do better"
-                    ratingColor = UIColor.colorFromRGB(red: 224, green: 224, blue: 7, alpha: 1)
+                    ratingColor = UIColor.init(red: 224.0/255.0, green: 224.0/255.0, blue: 7.0/255.0, alpha: 1)
+
                 } else {
                     rating += "Awesome! Keep up the good work"
-                    ratingColor = UIColor.colorFromRGB(red: 30, green: 189, blue: 30, alpha: 1)
+                    ratingColor = UIColor.init(red: 30.0/255.0, green: 189.0/255.0, blue: 30.0/255.0, alpha: 1)
                 }
                 cell.detailTextLabel?.text = rating
-                cell.detailTextLabel?.textColor = ratingColor
+                cell.detailTextLabel?.textColor = ratingColor!
             }
         }
         
@@ -127,6 +130,7 @@ class SingleTaskTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
+            if self.task.isComplete() { return }
             let workHour = self.workHours[indexPath.row]
             if workHour.finished == nil { return }
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "editWorkHourViewController") as? EditWorkHourViewController {

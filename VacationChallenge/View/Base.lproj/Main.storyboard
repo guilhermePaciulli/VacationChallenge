@@ -19,6 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="hQS-gi-IXx" kind="relationship" relationship="viewControllers" id="mtl-bQ-kte"/>
@@ -130,7 +131,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-8b-raz">
-                                            <rect key="frame" x="272" y="16.5" width="93.5" height="33.5"/>
+                                            <rect key="frame" x="262.5" y="16.5" width="112.5" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="Continue">
                                                 <color key="titleColor" red="0.14615885419999999" green="0.4624294704472221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -148,10 +149,11 @@
                                         <constraint firstItem="5Yw-8b-raz" firstAttribute="centerX" secondItem="K3p-vT-vti" secondAttribute="centerX" multiplier="1.7" id="h8O-rA-ROZ"/>
                                         <constraint firstAttribute="trailing" secondItem="QbR-Ma-tlK" secondAttribute="trailing" multiplier="1.4" id="lG8-mC-0yB"/>
                                         <constraint firstItem="5Yw-8b-raz" firstAttribute="centerY" secondItem="K3p-vT-vti" secondAttribute="centerY" id="qdX-o7-bKw"/>
-                                        <constraint firstItem="5Yw-8b-raz" firstAttribute="width" secondItem="K3p-vT-vti" secondAttribute="width" multiplier="0.25" id="x4Z-ph-C4X"/>
+                                        <constraint firstItem="5Yw-8b-raz" firstAttribute="width" secondItem="K3p-vT-vti" secondAttribute="width" multiplier="0.3" id="x4Z-ph-C4X"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="continueButtonOutlet" destination="5Yw-8b-raz" id="FpJ-D5-va8"/>
                                     <outlet property="taskCellTitle" destination="QbR-Ma-tlK" id="ZDN-UR-9dH"/>
                                 </connections>
                             </tableViewCell>
@@ -163,11 +165,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="waM-2r-5N6">
                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="edit" id="2Fz-gi-xHY">
+                            <color key="tintColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="editButtonPressed:" destination="Dtw-96-OQW" id="N7f-Nb-0xT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QM1-pI-5Hn">
+                            <color key="tintColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="ThG-fT-uda" kind="popoverPresentation" popoverAnchorBarButtonItem="QM1-pI-5Hn" id="WSq-hA-2NT">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -183,7 +187,7 @@
         <!--New Task View Controller-->
         <scene sceneID="sAH-XX-18E">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="ThG-fT-uda" customClass="NewTaskViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="ThG-fT-uda" customClass="NewTaskViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Afd-2d-VFV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,7 +201,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r74-Na-bnv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r74-Na-bnv">
                                         <rect key="frame" x="15" y="64.5" width="270" height="32"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <nil key="textColor"/>
@@ -209,7 +213,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task deadline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlB-n8-pL4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task deadline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlB-n8-pL4">
                                         <rect key="frame" x="15" y="143" width="270" height="32"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <nil key="textColor"/>
@@ -220,14 +224,18 @@
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyI-nR-G2P">
                                         <rect key="frame" x="0.0" y="355.5" width="150" height="32"/>
-                                        <state key="normal" title="Cancel"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="ThG-fT-uda" eventType="touchUpInside" id="4kv-4d-UDa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LP7-be-AoN">
                                         <rect key="frame" x="150" y="355.5" width="150" height="32"/>
-                                        <state key="normal" title="Create"/>
+                                        <state key="normal" title="Create">
+                                            <color key="titleColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="createButtonTapped:" destination="ThG-fT-uda" eventType="touchUpInside" id="koh-j9-7va"/>
                                         </connections>
@@ -317,7 +325,14 @@
                             <outlet property="delegate" destination="6uT-Ud-NQr" id="uQE-Gf-HeT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Results" id="gCl-ni-dnE"/>
+                    <navigationItem key="navigationItem" title="Results" id="gCl-ni-dnE">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="lqN-qz-eIB">
+                            <color key="tintColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="editButtonTapped:" destination="6uT-Ud-NQr" id="Wgk-pp-3l0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ta-YE-IJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -522,7 +537,7 @@
         <!--Edit Work Hour View Controller-->
         <scene sceneID="RAj-j6-B5M">
             <objects>
-                <viewController storyboardIdentifier="editWorkHourViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qfu-ij-5QC" customClass="EditWorkHourViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editWorkHourViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qfu-ij-5QC" customClass="EditWorkHourViewController" customModule="VacationChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qJJ-D8-rI5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -541,14 +556,18 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVg-Rx-Tdu">
                                         <rect key="frame" x="0.0" y="224.5" width="150" height="40"/>
-                                        <state key="normal" title="Cancel"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="qfu-ij-5QC" eventType="touchUpInside" id="edN-r7-vgg"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iaL-E9-wTI">
                                         <rect key="frame" x="150" y="224" width="150" height="40"/>
-                                        <state key="normal" title="Set"/>
+                                        <state key="normal" title="Set">
+                                            <color key="titleColor" red="1" green="0.21007593413911874" blue="0.048535301625263205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="setButtonTapped:" destination="qfu-ij-5QC" eventType="touchUpInside" id="fM4-pY-p9x"/>
                                         </connections>

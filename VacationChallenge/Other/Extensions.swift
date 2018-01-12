@@ -55,14 +55,3 @@ extension UIView {
         layer.add(animation, forKey: "shake")
     }
 }
-
-extension UIColor {
-    
-    static func colorFromRGB(red: Int, green: Int, blue: Int, alpha: Double) -> UIColor {
-        return UIColor(red: CGFloat(red / 255),
-                       green: CGFloat(green / 255),
-                       blue: CGFloat(blue / 255),
-                       alpha: CGFloat(alpha))
-    }
-    
-}

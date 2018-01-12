@@ -43,14 +43,14 @@ class TasksTableViewController: UITableViewController {
         if self.begunTasks.count > 0 { self.sections.append(.begunTasks) }
         if self.continueTasks.count > 0 { self.sections.append(.continueTasks) }
         if self.unbegunTasks.count > 0 { self.sections.append(.unbegunTasks) }
-
+        
         self.tableView.reloadData()
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.sections.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.sections[section] {
         case .begunTasks:
@@ -65,7 +65,7 @@ class TasksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sections[section].rawValue
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var reuseIdentifier = ""
         var task: Task!
@@ -104,11 +104,11 @@ class TasksTableViewController: UITableViewController {
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return self.sections[indexPath.section] == .unbegunTasks || self.sections[indexPath.section] == .continueTasks
     }
-
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             var task: Task!

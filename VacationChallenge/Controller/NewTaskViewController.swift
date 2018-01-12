@@ -24,6 +24,8 @@ class NewTaskViewController: UIViewController,  UIPickerViewDelegate, UIPickerVi
         super.viewDidLoad()
         popUpView.layer.cornerRadius = popUpView.frame.width / 20
         popUpView.clipsToBounds = true
+        popUpView.layer.borderWidth = popUpView.frame.width / 400
+        popUpView.layer.borderColor = #colorLiteral(red: 1, green: 0.2100759341, blue: 0.04853530163, alpha: 1)
         deadlinePickerView.delegate = self
         deadlinePickerView.dataSource = self
         taskTitleTextField.delegate = self

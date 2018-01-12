@@ -11,11 +11,6 @@ import UIKit
 class ResultsTableViewController: UITableViewController {
     
     var completedTasks: [Task] = []
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-         self.navigationItem.leftBarButtonItem = self.editButtonItem
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,4 +55,7 @@ class ResultsTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func editButtonTapped(_ sender: Any) {
+        self.tableView.isEditing = !self.tableView.isEditing
+    }
 }
