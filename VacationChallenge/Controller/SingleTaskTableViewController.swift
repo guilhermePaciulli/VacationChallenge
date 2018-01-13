@@ -105,7 +105,8 @@ class SingleTaskTableViewController: UITableViewController {
             if indexPath.row == 0 {
                 cell.detailTextLabel?.text = String(describing: (task.hoursWorked * 100) / 100) + " Hours"
             } else if indexPath.row == 1 {
-                cell.detailTextLabel?.text = String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
+                let deadline = TaskDeadline.options.first(where: { Double($0.hours) == self.task.hoursDeadline })
+                cell.detailTextLabel?.text = deadline?.title ?? String(describing: (task.hoursDeadline * 100) / 100) + " Hours"
             } else if indexPath.row == 2 && self.task.isComplete() {
                 var rating = String(describing: (task.rating * 100) / 100) + " - "
                 var ratingColor: UIColor?
@@ -142,10 +143,11 @@ class SingleTaskTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 1
+        return indexPath.section == 1 && self.workHours.count != 0
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if self.workHours.count == 0 { return }
         if editingStyle == .delete {
             let workHourToBeDeleted = self.workHours[indexPath.row]
             self.workHours.remove(at: indexPath.row)
