@@ -97,6 +97,7 @@ class SingleTaskTableViewController: UITableViewController {
                 let stringMinute = String(describing: components.minute!)
                 let stringHour = String(describing: components.hour!)
                 cell.detailTextLabel?.text = "at "+stringHour+":"+stringMinute+" of "+stringMonth+"/"+stringDay
+                cell.detailTextLabel?.textColor = UIColor.black
             } else {
                 cell.detailTextLabel?.text = "Running!"
                 cell.detailTextLabel?.textColor = UIColor.init(red: 30.0/255.0, green: 189.0/255.0, blue: 30.0/255.0, alpha: 1)
@@ -143,7 +144,7 @@ class SingleTaskTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 1 && self.workHours.count != 0
+        return indexPath.section == 1 && self.workHours.count != 0 && self.workHours[indexPath.row].finished != nil
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
