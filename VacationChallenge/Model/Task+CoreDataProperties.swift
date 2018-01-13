@@ -35,6 +35,7 @@ extension Task {
         if let task = entity as? Task {
             task.title = title
             task.hoursDeadline = hoursDeadline
+            task.rating = -1
         }
         
         DatabaseController.shared.saveContext()
@@ -75,13 +76,17 @@ extension Task {
     }
     
     public func isComplete() -> Bool {
-        return self.rating != 0.0
+        return self.rating != -1
     }
     
     public func complete() {
         if self.isComplete() { return }
         self.stop()
-        let escaled = (10 * self.hoursWorked) / self.hoursDeadline
+        var escaled = (10 * self.hoursWorked) / self.hoursDeadline
+        escaled = escaled - 10
+        escaled = escaled < 0 ? -1 * escaled : escaled
+        escaled = (-1 * escaled) + 10
+        escaled = escaled < 0 ? 0 : escaled
         self.rating = Double(round(escaled * 100)) / 100
         DatabaseController.shared.saveContext()
     }
