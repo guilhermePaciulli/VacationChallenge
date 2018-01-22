@@ -39,21 +39,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="begunTaskCell" rowHeight="67" id="gsQ-iK-cpf" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="begunTaskCell" rowHeight="67" id="gsQ-iK-cpf" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gsQ-iK-cpf" id="yna-eH-dac">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="66.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Begun task title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="omv-5I-xJa">
-                                            <rect key="frame" x="24" y="20" width="244" height="26.5"/>
+                                            <rect key="frame" x="22" y="20" width="221.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLY-TL-Kl5">
-                                            <rect key="frame" x="272" y="17" width="93.5" height="33"/>
+                                            <rect key="frame" x="247" y="17" width="85.5" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="Stop">
                                                 <color key="titleColor" red="0.82980685763888884" green="0.28934330769589411" blue="0.30595253410331719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,21 +78,21 @@
                                     <outlet property="taskCellTitle" destination="omv-5I-xJa" id="AYr-qD-QBV"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="unbegunTaskCell" rowHeight="67" id="2T4-Bw-wdx" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="unbegunTaskCell" rowHeight="67" id="2T4-Bw-wdx" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="95" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2T4-Bw-wdx" id="CTS-8X-epg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="66.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unbegun task title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZg-7D-eLx">
-                                            <rect key="frame" x="24" y="20" width="244" height="26.5"/>
+                                            <rect key="frame" x="22" y="20" width="221.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj1-Mi-dAs">
-                                            <rect key="frame" x="272" y="16.5" width="93.5" height="33.5"/>
+                                            <rect key="frame" x="247" y="16.5" width="85.5" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="Start">
                                                 <color key="titleColor" red="0.14615885416666666" green="0.84054904513888884" blue="0.45460704799220608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -117,21 +117,21 @@
                                     <outlet property="taskCellTitle" destination="GZg-7D-eLx" id="HlH-ON-OEd"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="continueTaskCell" rowHeight="67" id="4T0-de-4kR" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="continueTaskCell" rowHeight="67" id="4T0-de-4kR" customClass="TaskTableViewCell" customModule="VacationChallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="162" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4T0-de-4kR" id="K3p-vT-vti">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="66.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue task title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QbR-Ma-tlK">
-                                            <rect key="frame" x="24" y="20" width="244" height="26.5"/>
+                                            <rect key="frame" x="22" y="20" width="221.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-8b-raz">
-                                            <rect key="frame" x="262.5" y="16.5" width="112.5" height="33.5"/>
+                                            <rect key="frame" x="238.5" y="16.5" width="102.5" height="33.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="Continue">
                                                 <color key="titleColor" red="0.14615885419999999" green="0.4624294704472221" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
