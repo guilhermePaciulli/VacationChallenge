@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD719C1C201667B300BA6A0D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD719C1B201667B300BA6A0D /* CloudKit.framework */; };
 		BD719C1E20166C2E00BA6A0D /* CKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C1D20166C2E00BA6A0D /* CKManager.swift */; };
+		BD719C2020167CC200BA6A0D /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */; };
 		BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */; };
 		BD91A113200529F100A03CC2 /* WorkHour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */; };
 		BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */; };
@@ -52,6 +53,7 @@
 		BD719C19201666F400BA6A0D /* VacationChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VacationChallenge.entitlements; sourceTree = "<group>"; };
 		BD719C1B201667B300BA6A0D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		BD719C1D20166C2E00BA6A0D /* CKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManager.swift; sourceTree = "<group>"; };
+		BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
 		BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				BD91A11620052A5D00A03CC2 /* DatabaseController.swift */,
 				BD91A11A200555A400A03CC2 /* Extensions.swift */,
 				BD719C1D20166C2E00BA6A0D /* CKManager.swift */,
+				BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				BD91A119200553EB00A03CC2 /* TasksTableViewController.swift in Sources */,
 				BD91A1252006934F00A03CC2 /* SingleTaskTableViewController.swift in Sources */,
 				BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */,
+				BD719C2020167CC200BA6A0D /* CloudKitHelper.swift in Sources */,
 				BD719C1E20166C2E00BA6A0D /* CKManager.swift in Sources */,
 				BD91A11D2005594300A03CC2 /* TaskTableViewCell.swift in Sources */,
 				BD91A11F20055D0B00A03CC2 /* NewTaskViewController.swift in Sources */,

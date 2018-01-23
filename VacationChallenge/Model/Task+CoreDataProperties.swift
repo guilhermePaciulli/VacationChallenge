@@ -36,7 +36,9 @@ extension Task {
             task.title = title
             task.hoursDeadline = hoursDeadline
             task.rating = -1
+            CKManager.shared.create(entity: task, completion: nil)
         }
+        
         
         DatabaseController.shared.saveContext()
 
