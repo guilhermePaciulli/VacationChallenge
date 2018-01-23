@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 09/01/18.
+//  Created by Guilherme Paciulli on 23/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -41,7 +41,7 @@ extension Task {
         
         
         DatabaseController.shared.saveContext()
-
+        
     }
     
     public func start() {
@@ -93,10 +93,11 @@ extension Task {
         DatabaseController.shared.saveContext()
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var hoursDeadline: Double
-    @NSManaged public var rating: Double
     @NSManaged public var hoursWorked: Double
+    @NSManaged public var rating: Double
+    @NSManaged public var title: String?
+    @NSManaged public var ckRecordId: Int32
     @NSManaged public var workHours: NSOrderedSet?
 
 }

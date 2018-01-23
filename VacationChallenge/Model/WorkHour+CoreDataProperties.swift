@@ -2,7 +2,7 @@
 //  WorkHour+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 09/01/18.
+//  Created by Guilherme Paciulli on 23/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -12,7 +12,7 @@ import CoreData
 
 
 extension WorkHour {
-    
+
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WorkHour> {
         return NSFetchRequest<WorkHour>(entityName: "WorkHour")
     }
@@ -32,8 +32,8 @@ extension WorkHour {
         self.task?.hoursWorked -= self.hoursSpent
         self.hoursSpent = hour
         self.finished = Calendar.current.date(byAdding: .hour,
-                                                       value: Int(self.hoursSpent),
-                                                       to: self.finished! as Date)! as NSDate
+                                              value: Int(self.hoursSpent),
+                                              to: self.finished! as Date)! as NSDate
         self.task?.hoursWorked += self.hoursSpent
         DatabaseController.shared.saveContext()
     }
@@ -62,10 +62,11 @@ extension WorkHour {
         DatabaseController.shared.persistentContainer.viewContext.delete(self)
         DatabaseController.shared.saveContext()
     }
-    
-    @NSManaged public var started: NSDate?
+
     @NSManaged public var finished: NSDate?
     @NSManaged public var hoursSpent: Double
+    @NSManaged public var started: NSDate?
+    @NSManaged public var ckRecordId: Int32
     @NSManaged public var task: Task?
-    
+
 }

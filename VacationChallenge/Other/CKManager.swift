@@ -26,6 +26,28 @@ class CKManager {
         self.database = container.privateCloudDatabase
     }
     
+    public func fetchTasks(completion: @escaping (CKCustomError) -> (Void)) {
+        let query = CKQuery(recordType: self.task, predicate: NSPredicate(value: true))
+        self.database.perform(query, inZoneWith: nil, completionHandler: {(records, error) in
+            guard error == nil else {
+                completion(CKCustomError(message: "Error in fetching tasks"))
+                return
+            }
+            if let records = records {
+                for record in records {
+                    if  let title = record[.title] as? String,
+                        let hoursDeadline = record[.hoursDeadline],
+                        let rating = record[.rating],
+                        let hoursWorked = record[.hoursWorked],
+                        let workHours = record[.workHours] {
+                        
+                    }
+                    
+                }
+            }
+        })
+    }
+    
     public func create(entity: NSManagedObject, completion: ((CKCustomError?) -> (Void))?) {
         switch entity {
         case is Task:
