@@ -18,18 +18,33 @@ class TasksTableViewController: UITableViewController {
     
     var sections: [Sections] = []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        CKManager.shared.pullCloudToLocal(completion: { (tasks, error) in
+            guard error == nil else { return }
+            if let tasks = tasks {
+                if !tasks.isEmpty {
+                    DispatchQueue.main.async {
+                        self.reloadTasks(with: tasks)
+                    }
+                }
+            }
+        })
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadTasks()
     }
     
-    func reloadTasks() {
+    func reloadTasks(with newTasks: [Task] = []) {
         self.continueTasks = []
         self.begunTasks = []
         self.unbegunTasks = []
         self.sections = []
         
-        let allTasks = Task.fetchAll()
+        var allTasks = Task.fetchAll()
+        allTasks.append(contentsOf: newTasks)
         for task in allTasks {
             if task.isComplete() { continue }
             if task.isActive() {

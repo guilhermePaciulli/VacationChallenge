@@ -66,7 +66,7 @@ extension WorkHour {
     @NSManaged public var finished: NSDate?
     @NSManaged public var hoursSpent: Double
     @NSManaged public var started: NSDate?
-    @NSManaged public var ckRecordId: Int32
+    @NSManaged public var ckRecordId: String?
     @NSManaged public var task: Task?
 
 }

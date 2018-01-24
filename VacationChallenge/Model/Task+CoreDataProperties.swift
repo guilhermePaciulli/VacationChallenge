@@ -17,12 +17,28 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Task")
     }
     
+    @nonobjc public class func fetchRequest(by ckRecordID: String) -> NSFetchRequest<Task> {
+        let request = NSFetchRequest<Task>(entityName: "Task")
+        request.predicate = NSPredicate(format: "ckRecordId = %@", ckRecordID)
+        return request
+    }
+    
     @nonobjc public class func fetchAll() -> [Task] {
         do {
             let entities = try DatabaseController.shared.persistentContainer.viewContext.fetch(self.fetchRequest())
             if let tasks = entities as? [Task] {
                 return tasks
             }
+        } catch {
+            fatalError("Failed to fetch tasks: \(error)")
+        }
+        return []
+    }
+    
+    @nonobjc public class func fetchBy(ckRecordId: String) -> [Task] {
+        do {
+            let entities = try DatabaseController.shared.persistentContainer.viewContext.fetch(self.fetchRequest(by: ckRecordId))
+            return entities as [Task]
         } catch {
             fatalError("Failed to fetch tasks: \(error)")
         }
@@ -36,7 +52,6 @@ extension Task {
             task.title = title
             task.hoursDeadline = hoursDeadline
             task.rating = -1
-            CKManager.shared.create(entity: task, completion: nil)
         }
         
         
@@ -97,7 +112,7 @@ extension Task {
     @NSManaged public var hoursWorked: Double
     @NSManaged public var rating: Double
     @NSManaged public var title: String?
-    @NSManaged public var ckRecordId: Int32
+    @NSManaged public var ckRecordId: String?
     @NSManaged public var workHours: NSOrderedSet?
 
 }
