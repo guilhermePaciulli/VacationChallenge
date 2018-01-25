@@ -9,6 +9,7 @@
 import Foundation
 import CloudKit
 import CoreData
+import UIKit
 
 class CKManager {
     
@@ -26,17 +27,26 @@ class CKManager {
         self.database = container.privateCloudDatabase
     }
     
-    public func pullCloudToLocal(completion: @escaping ([Task]?, CKCustomError?) -> (Void)) {
+    public func pullCloudToLocal(completion: @escaping () -> (Void)) {
         let query = CKQuery(recordType: self.TaskRecordType, predicate: NSPredicate(value: true))
-        self.database.perform(query, inZoneWith: nil, completionHandler: {(taskRecords, error) in
+        self.database.perform(query, inZoneWith: nil, completionHandler: { (taskRecords, error) in
             guard error == nil, let records = taskRecords else {
-                completion(nil, CKCustomError(message: "Error in fetching tasks"))
+                completion()
                 return
             }
-            var diffTasks: [Task] = []
             var counter = records.count
             for taskRecord in records {
-                if !Task.fetchBy(ckRecordId: taskRecord.recordID.recordName).isEmpty { continue }
+                if let localTask = Task.fetchBy(ckRecordId: taskRecord.recordID.recordName).first {
+                    if !self.compare(record: taskRecord, to: localTask) {
+                        self.update(entity: localTask)
+                    }
+                    counter -= 1
+                    if counter == 0 {
+                        DatabaseController.shared.saveContext()
+                        completion()
+                    }
+                    continue
+                }
                 if  let title = taskRecord[.title] as? String, let hoursDeadline = taskRecord[.hoursDeadline] as? Double, let rating = taskRecord[.rating] as? Double, let hoursWorked = taskRecord[.hoursWorked] as? Double {
                     
                     if let task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: DatabaseController.shared.persistentContainer.viewContext) as? Task {
@@ -49,7 +59,14 @@ class CKManager {
                         if let references = taskRecord[.workHours] as? [CKReference] {
                             for ref in references {
                                 self.database.fetch(withRecordID: ref.recordID, completionHandler: { (workHourRecord, error) in
-                                    guard error == nil, let workHourRecord = workHourRecord else { return }
+                                    guard error == nil, let workHourRecord = workHourRecord else {
+                                        counter -= 1
+                                        if counter == 0 {
+                                            DatabaseController.shared.saveContext()
+                                            completion()
+                                        }
+                                        return
+                                    }
                                     if  let started = workHourRecord[.started] as? NSDate, let finished = workHourRecord[.finished] as? NSDate, let hoursSpent = workHourRecord[.hoursSpent] as? Double {
                                         
                                         if let workHour = NSEntityDescription.insertNewObject(forEntityName: "WorkHour", into: DatabaseController.shared.persistentContainer.viewContext) as? WorkHour {
@@ -60,26 +77,48 @@ class CKManager {
                                             task.addToWorkHours(workHour)
                                         }
                                     }
-                                    diffTasks.append(task)
                                     counter -= 1
                                     if counter == 0 {
                                         DatabaseController.shared.saveContext()
-                                        completion(diffTasks, nil)
+                                        completion()
                                     }
                                 })
                             }
                         } else {
-                            diffTasks.append(task)
                             counter -= 1
                             if counter == 0 {
                                 DatabaseController.shared.saveContext()
-                                completion(diffTasks, nil)
+                                completion()
                             }
                         }
                     }
                 }
             }
         })
+    }
+    
+    private func compare(record: CKRecord, to task: Task) -> Bool {
+        if  let title = record[.title] as? String,
+            let hoursDeadline = record[.hoursDeadline] as? Double,
+            let rating = record[.rating] as? Double,
+            let hoursWorked = record[.hoursWorked] as? Double {
+            return title == task.title &&
+                hoursWorked == task.hoursWorked &&
+                rating == task.rating &&
+                hoursDeadline == task.hoursDeadline
+        }
+        return false
+    }
+    
+    private func compare(record: CKRecord, to workHour: WorkHour) -> Bool {
+        if  let started = record[.started] as? NSDate,
+            let finished = record[.finished] as? NSDate,
+            let hoursSpent = record[.hoursSpent] as? Double {
+            return started == workHour.started &&
+                finished == workHour.finished &&
+                hoursSpent == workHour.hoursSpent
+        }
+        return false
     }
     
     public func create(entity: NSManagedObject) {
@@ -156,6 +195,18 @@ class CKManager {
             taskRecord[.rating] = task.rating
             taskRecord[.hoursDeadline] = task.hoursDeadline
             taskRecord[.hoursWorked] = task.hoursWorked
+            var references: [CKReference] = []
+            if let workHours = (task.workHours)?.array as? [WorkHour] {
+                for workHour in workHours {
+                    let record = CKRecord(recordType: self.WorkHourRecordType)
+                    record[.started] = workHour.started
+                    record[.finished] = workHour.finished
+                    record[.hoursSpent] = workHour.hoursSpent
+                    record[.task] = task.ckRecordId
+                    references.append(CKReference(record: record, action: .none))
+                }
+            }
+            taskRecord[.workHours] = references
             self.database.save(taskRecord, completionHandler: { (_, _) in })
         })
     }
@@ -166,6 +217,9 @@ class CKManager {
             workHourRecord[.started] = workHour.started
             workHourRecord[.finished] = workHour.finished
             workHourRecord[.hoursSpent] = workHour.hoursSpent
+            if let taskRecordId = workHour.task?.ckRecordId {
+                workHourRecord[.task] = taskRecordId
+            }
             self.database.save(workHourRecord, completionHandler: { (_, _) in })
         })
     }
@@ -175,23 +229,16 @@ class CKManager {
         case is Task:
             let task = entity as! Task
             if let recordName = task.ckRecordId {
-                self.delete(entityWith: recordName)
+                self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
             }
         case is WorkHour:
             let workHour = entity as! WorkHour
             if let recordName = workHour.ckRecordId {
-                self.delete(entityWith: recordName)
+                self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
             }
         default:
             break
         }
     }
     
-    private func delete(entityWith recordName: String) {
-        self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
-    }
-}
-
-struct CKCustomError {
-    let message: String
 }

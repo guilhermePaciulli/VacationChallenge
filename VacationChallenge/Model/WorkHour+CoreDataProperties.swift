@@ -24,6 +24,7 @@ extension WorkHour {
         workHour.started = NSDate()
         workHour.task = task
         DatabaseController.shared.saveContext()
+        CKManager.shared.create(entity: workHour)
         
         return workHour
     }
@@ -36,6 +37,7 @@ extension WorkHour {
                                               to: self.finished! as Date)! as NSDate
         self.task?.hoursWorked += self.hoursSpent
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
     }
     
     public func stop() {
@@ -54,6 +56,7 @@ extension WorkHour {
         self.task?.hoursWorked += self.hoursSpent
         self.task?.hoursWorked = Double(round((self.task?.hoursWorked)! * 100) / 100)
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
     }
     
     public func delete() {
@@ -61,6 +64,7 @@ extension WorkHour {
         DatabaseController.shared.saveContext()
         DatabaseController.shared.persistentContainer.viewContext.delete(self)
         DatabaseController.shared.saveContext()
+        CKManager.shared.delete(entity: self)
     }
 
     @NSManaged public var finished: NSDate?

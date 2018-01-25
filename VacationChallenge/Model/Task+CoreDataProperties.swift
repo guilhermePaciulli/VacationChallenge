@@ -67,6 +67,7 @@ extension Task {
         }
         self.addToWorkHours(WorkHour.startWorking(to: self))
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
     }
     
     public func stop() {
@@ -106,6 +107,19 @@ extension Task {
         escaled = (-1 * escaled) + 10
         escaled = escaled < 0 ? 0 : escaled
         self.rating = Double(round(escaled * 100)) / 100
+        DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
+    }
+    
+    public func delete() {
+        if let workHours = (self.workHours?.array) as? [WorkHour] {
+            for workHour in workHours {
+                DatabaseController.shared.persistentContainer.viewContext.delete(workHour)
+                CKManager.shared.delete(entity: workHour)
+            }
+        }
+        DatabaseController.shared.persistentContainer.viewContext.delete(self)
+        CKManager.shared.delete(entity: self)
         DatabaseController.shared.saveContext()
     }
 

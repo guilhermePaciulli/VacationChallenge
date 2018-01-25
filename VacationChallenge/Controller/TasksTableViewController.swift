@@ -20,16 +20,11 @@ class TasksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CKManager.shared.pullCloudToLocal(completion: { (tasks, error) in
-            guard error == nil else { return }
-            if let tasks = tasks {
-                if !tasks.isEmpty {
-                    DispatchQueue.main.async {
-                        self.reloadTasks(with: tasks)
-                    }
-                }
+        CKManager.shared.pullCloudToLocal {
+            DispatchQueue.main.async {
+                self.reloadTasks()
             }
-        })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,14 +32,13 @@ class TasksTableViewController: UITableViewController {
         self.reloadTasks()
     }
     
-    func reloadTasks(with newTasks: [Task] = []) {
+    func reloadTasks() {
         self.continueTasks = []
         self.begunTasks = []
         self.unbegunTasks = []
         self.sections = []
         
-        var allTasks = Task.fetchAll()
-        allTasks.append(contentsOf: newTasks)
+        let allTasks = Task.fetchAll()
         for task in allTasks {
             if task.isComplete() { continue }
             if task.isActive() {
@@ -139,8 +133,7 @@ class TasksTableViewController: UITableViewController {
                 self.unbegunTasks.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-            DatabaseController.shared.persistentContainer.viewContext.delete(task)
-            DatabaseController.shared.saveContext()
+            task.delete()
             self.reloadTasks()
         }
     }
