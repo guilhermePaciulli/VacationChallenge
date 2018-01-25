@@ -82,28 +82,19 @@ class CKManager {
         })
     }
     
-    public func create(entity: NSManagedObject, completion: ((CKCustomError?) -> (Void))?) {
+    public func create(entity: NSManagedObject) {
         switch entity {
         case is Task:
-            self.create(task: entity as! Task, completion: { error in
-                if completion != nil {
-                    completion!(error)
-                }
-            })
+            self.create(task: entity as! Task)
         case is WorkHour:
-            self.create(workHour: entity as! WorkHour, completion: { error in
-                if completion != nil {
-                    completion!(error)
-                }
-            })
+            self.create(workHour: entity as! WorkHour)
         default:
-            if completion != nil {
-                completion!(CKCustomError(message: "Entity is not implemented on Cloud Kit"))
-            }
+            break
         }
     }
     
-    private func create(task: Task, completion: ((CKCustomError?) -> (Void))?) {
+    
+    private func create(task: Task) {
         let taskRecord = CKRecord(recordType: self.TaskRecordType)
         taskRecord[.title] = task.title
         taskRecord[.rating] = task.rating
@@ -111,18 +102,14 @@ class CKManager {
         taskRecord[.hoursWorked] = task.hoursWorked
         
         self.database.save(taskRecord, completionHandler: { (record, error) in
-            guard let completion = completion else { return }
-            if error != nil {
-                completion(CKCustomError(message: "Error in creating new task record"))
-            } else {
+            if error == nil {
                 task.ckRecordId = record?.recordID.recordName
                 DatabaseController.shared.saveContext()
-                completion(nil)
             }
         })
     }
     
-    private func create(workHour: WorkHour, completion: ((CKCustomError?) -> (Void))?) {
+    private func create(workHour: WorkHour) {
         let record = CKRecord(recordType: self.WorkHourRecordType)
         record[.started] = workHour.started
         record[.finished] = workHour.finished
@@ -130,21 +117,79 @@ class CKManager {
         
         if let taskCKRecordID = workHour.task?.ckRecordId {
             self.database.fetch(withRecordID: CKRecordID(recordName: taskCKRecordID), completionHandler: { (taskRecord, error) in
-                record[.task] = taskRecord
+                record[.task] = CKReference(record: taskRecord!, action: .deleteSelf)
                 self.database.save(record, completionHandler: { (record, error) in
-                    guard let completion = completion else { return }
-                    if error != nil {
-                        completion(CKCustomError(message: "Error in creating new work hour record"))
-                    } else {
+                    if error == nil {
                         workHour.ckRecordId = record?.recordID.recordName
                         DatabaseController.shared.saveContext()
-                        completion(nil)
                     }
                 })
             })
         }
     }
     
+    public func update(entity: NSManagedObject) {
+        switch entity {
+        case is Task:
+            let task = entity as! Task
+            if let recordName = task.ckRecordId {
+                self.update(task: task, recordName: recordName)
+            } else {
+                self.create(entity: task)
+            }
+        case is WorkHour:
+            let workHour = entity as! WorkHour
+            if let recordName = workHour.ckRecordId {
+                self.update(workHour: workHour, recordName: recordName)
+            } else {
+                self.create(entity: workHour)
+            }
+        default:
+            break
+        }
+    }
+    
+    private func update(task: Task, recordName: String) {
+        self.database.fetch(withRecordID: CKRecordID(recordName: recordName), completionHandler:{ (record, error) in
+            guard error == nil, let taskRecord = record else { return }
+            taskRecord[.title] = task.title
+            taskRecord[.rating] = task.rating
+            taskRecord[.hoursDeadline] = task.hoursDeadline
+            taskRecord[.hoursWorked] = task.hoursWorked
+            self.database.save(taskRecord, completionHandler: { (_, _) in })
+        })
+    }
+    
+    private func update(workHour: WorkHour, recordName: String) {
+        self.database.fetch(withRecordID: CKRecordID(recordName: recordName), completionHandler:{ (record, error) in
+            guard error == nil, let workHourRecord = record else { return }
+            workHourRecord[.started] = workHour.started
+            workHourRecord[.finished] = workHour.finished
+            workHourRecord[.hoursSpent] = workHour.hoursSpent
+            self.database.save(workHourRecord, completionHandler: { (_, _) in })
+        })
+    }
+    
+    public func delete(entity: NSManagedObject) {
+        switch entity {
+        case is Task:
+            let task = entity as! Task
+            if let recordName = task.ckRecordId {
+                self.delete(entityWith: recordName)
+            }
+        case is WorkHour:
+            let workHour = entity as! WorkHour
+            if let recordName = workHour.ckRecordId {
+                self.delete(entityWith: recordName)
+            }
+        default:
+            break
+        }
+    }
+    
+    private func delete(entityWith recordName: String) {
+        self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
+    }
 }
 
 struct CKCustomError {

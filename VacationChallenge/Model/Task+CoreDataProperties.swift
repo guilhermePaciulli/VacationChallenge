@@ -54,6 +54,7 @@ extension Task {
             task.rating = -1
         }
         
+        CKManager.shared.create(entity: entity)
         
         DatabaseController.shared.saveContext()
         
