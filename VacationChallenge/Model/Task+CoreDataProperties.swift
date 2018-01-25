@@ -67,7 +67,6 @@ extension Task {
         }
         self.addToWorkHours(WorkHour.startWorking(to: self))
         DatabaseController.shared.saveContext()
-        CKManager.shared.update(entity: self)
     }
     
     public func stop() {
