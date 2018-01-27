@@ -42,8 +42,7 @@ class ResultsTableViewController: UITableViewController {
             let task = self.completedTasks[indexPath.row]
             self.completedTasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            DatabaseController.shared.persistentContainer.viewContext.delete(task)
-            DatabaseController.shared.saveContext()
+            task.delete()
             self.reloadTasks()
         }
     }

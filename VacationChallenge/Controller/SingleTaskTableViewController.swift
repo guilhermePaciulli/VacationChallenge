@@ -14,6 +14,8 @@ class SingleTaskTableViewController: UITableViewController {
     
     var workHours: [WorkHour] = []
     
+    var isDeletingTask = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.2100759341, blue: 0.04853530163, alpha: 1)
@@ -55,7 +57,11 @@ class SingleTaskTableViewController: UITableViewController {
         if section == 0 {
             return 3
         }
-        return self.workHours.count == 0 ? 1 : self.workHours.count
+        if isDeletingTask {
+            return self.workHours.count
+        } else {
+            return self.workHours.count == 0 ? 1 : self.workHours.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,7 +158,9 @@ class SingleTaskTableViewController: UITableViewController {
         if editingStyle == .delete {
             let workHourToBeDeleted = self.workHours[indexPath.row]
             self.workHours.remove(at: indexPath.row)
+            isDeletingTask = true
             tableView.deleteRows(at: [indexPath], with: .fade)
+            isDeletingTask = false
             workHourToBeDeleted.delete()
             self.reloadTaskOverview()
         }

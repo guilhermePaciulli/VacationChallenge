@@ -1,50 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "group:../VacationChallenge/Other/Assets.xcassets"
-      name = "Assets.xcassets">
-      <Group
-         location = "group:resultsTabBarIcon_@2.imageset"
-         name = "resultsTabBarIcon_@2.imageset">
-         <FileRef
-            location = "group:Contents.json">
-         </FileRef>
-         <FileRef
-            location = "group:resultsTabBarIcon_@2.png">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:resultsTabBarIcon_@3.imageset"
-         name = "resultsTabBarIcon_@3.imageset">
-         <FileRef
-            location = "group:Contents.json">
-         </FileRef>
-         <FileRef
-            location = "group:resultsTabBarIcon_@3.png">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:AppIcon.appiconset"
-         name = "AppIcon.appiconset">
-         <FileRef
-            location = "group:Contents.json">
-         </FileRef>
-      </Group>
-      <FileRef
-         location = "group:Contents.json">
-      </FileRef>
-      <Group
-         location = "group:resultsTabBarIcon_@1.imageset"
-         name = "resultsTabBarIcon_@1.imageset">
-         <FileRef
-            location = "group:Contents.json">
-         </FileRef>
-         <FileRef
-            location = "group:resultsTabBarIcon_@1.png">
-         </FileRef>
-      </Group>
-   </Group>
    <FileRef
       location = "self:">
    </FileRef>

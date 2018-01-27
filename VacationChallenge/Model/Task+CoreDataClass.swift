@@ -2,7 +2,7 @@
 //  Task+CoreDataClass.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 09/01/18.
+//  Created by Guilherme Paciulli on 27/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //

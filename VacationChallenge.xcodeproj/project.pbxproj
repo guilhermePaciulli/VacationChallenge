@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */; };
-		BD91A113200529F100A03CC2 /* WorkHour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */; };
-		BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */; };
-		BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */; };
+		BD719C1C201667B300BA6A0D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD719C1B201667B300BA6A0D /* CloudKit.framework */; };
+		BD719C1E20166C2E00BA6A0D /* CKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C1D20166C2E00BA6A0D /* CKManager.swift */; };
+		BD719C2020167CC200BA6A0D /* CloudKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */; };
+		BD719C33201CEA5100BA6A0D /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C31201CEA5100BA6A0D /* Task+CoreDataClass.swift */; };
+		BD719C34201CEA5100BA6A0D /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C32201CEA5100BA6A0D /* Task+CoreDataProperties.swift */; };
+		BD719C37201CEA8E00BA6A0D /* WorkHour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C35201CEA8E00BA6A0D /* WorkHour+CoreDataClass.swift */; };
+		BD719C38201CEA8E00BA6A0D /* WorkHour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD719C36201CEA8E00BA6A0D /* WorkHour+CoreDataProperties.swift */; };
 		BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11620052A5D00A03CC2 /* DatabaseController.swift */; };
 		BD91A119200553EB00A03CC2 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A118200553EB00A03CC2 /* TasksTableViewController.swift */; };
 		BD91A11B200555A400A03CC2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD91A11A200555A400A03CC2 /* Extensions.swift */; };
@@ -47,10 +50,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD719C19201666F400BA6A0D /* VacationChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VacationChallenge.entitlements; sourceTree = "<group>"; };
+		BD719C1B201667B300BA6A0D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		BD719C1D20166C2E00BA6A0D /* CKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKManager.swift; sourceTree = "<group>"; };
+		BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHelper.swift; sourceTree = "<group>"; };
+		BD719C31201CEA5100BA6A0D /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD719C32201CEA5100BA6A0D /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD719C35201CEA8E00BA6A0D /* WorkHour+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD719C36201CEA8E00BA6A0D /* WorkHour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkHour+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BD91A11620052A5D00A03CC2 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		BD91A118200553EB00A03CC2 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		BD91A11A200555A400A03CC2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -80,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD719C1C201667B300BA6A0D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD719C1A201667B300BA6A0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD719C1B201667B300BA6A0D /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BDAA565720039C0900986EF6 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +123,7 @@
 				BDAA567A20039C0A00986EF6 /* VacationChallengeTests */,
 				BDAA568520039C0A00986EF6 /* VacationChallengeUITests */,
 				BDAA566120039C0900986EF6 /* Products */,
+				BD719C1A201667B300BA6A0D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +140,7 @@
 		BDAA566220039C0900986EF6 /* VacationChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				BD719C19201666F400BA6A0D /* VacationChallenge.entitlements */,
 				BDAA569520039DF800986EF6 /* Other */,
 				BDAA569420039DD700986EF6 /* Controller */,
 				BDAA569620039E0500986EF6 /* View */,
@@ -170,6 +188,8 @@
 				BDAA566320039C0900986EF6 /* AppDelegate.swift */,
 				BD91A11620052A5D00A03CC2 /* DatabaseController.swift */,
 				BD91A11A200555A400A03CC2 /* Extensions.swift */,
+				BD719C1D20166C2E00BA6A0D /* CKManager.swift */,
+				BD719C1F20167CC200BA6A0D /* CloudKitHelper.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -186,10 +206,10 @@
 		BDAA569720039E2B00986EF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BD91A10E200529F100A03CC2 /* WorkHour+CoreDataClass.swift */,
-				BD91A10F200529F100A03CC2 /* WorkHour+CoreDataProperties.swift */,
-				BD91A110200529F100A03CC2 /* Task+CoreDataClass.swift */,
-				BD91A111200529F100A03CC2 /* Task+CoreDataProperties.swift */,
+				BD719C35201CEA8E00BA6A0D /* WorkHour+CoreDataClass.swift */,
+				BD719C36201CEA8E00BA6A0D /* WorkHour+CoreDataProperties.swift */,
+				BD719C31201CEA5100BA6A0D /* Task+CoreDataClass.swift */,
+				BD719C32201CEA5100BA6A0D /* Task+CoreDataProperties.swift */,
 				BD91A1222006913600A03CC2 /* TaskDeadline.swift */,
 				BDAA566A20039C0900986EF6 /* VacationChallenge.xcdatamodeld */,
 			);
@@ -265,6 +285,14 @@
 					BDAA565F20039C0900986EF6 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					BDAA567620039C0A00986EF6 = {
 						CreatedOnToolsVersion = 9.1;
@@ -332,19 +360,21 @@
 			files = (
 				BD91A119200553EB00A03CC2 /* TasksTableViewController.swift in Sources */,
 				BD91A1252006934F00A03CC2 /* SingleTaskTableViewController.swift in Sources */,
-				BD91A112200529F100A03CC2 /* WorkHour+CoreDataClass.swift in Sources */,
+				BD719C2020167CC200BA6A0D /* CloudKitHelper.swift in Sources */,
+				BD719C1E20166C2E00BA6A0D /* CKManager.swift in Sources */,
+				BD719C38201CEA8E00BA6A0D /* WorkHour+CoreDataProperties.swift in Sources */,
 				BD91A11D2005594300A03CC2 /* TaskTableViewCell.swift in Sources */,
 				BD91A11F20055D0B00A03CC2 /* NewTaskViewController.swift in Sources */,
 				BDAA566C20039C0900986EF6 /* VacationChallenge.xcdatamodeld in Sources */,
 				BDAA566420039C0900986EF6 /* AppDelegate.swift in Sources */,
 				BD91A11B200555A400A03CC2 /* Extensions.swift in Sources */,
+				BD719C34201CEA5100BA6A0D /* Task+CoreDataProperties.swift in Sources */,
+				BD719C33201CEA5100BA6A0D /* Task+CoreDataClass.swift in Sources */,
 				BD91A1232006913600A03CC2 /* TaskDeadline.swift in Sources */,
+				BD719C37201CEA8E00BA6A0D /* WorkHour+CoreDataClass.swift in Sources */,
 				BDB75CEB2007EA6600EA7E30 /* ResultsTableViewController.swift in Sources */,
 				BD91A11720052A5D00A03CC2 /* DatabaseController.swift in Sources */,
 				BDB75CE92007CAEC00EA7E30 /* EditWorkHourViewController.swift in Sources */,
-				BD91A115200529F100A03CC2 /* Task+CoreDataProperties.swift in Sources */,
-				BD91A114200529F100A03CC2 /* Task+CoreDataClass.swift in Sources */,
-				BD91A113200529F100A03CC2 /* WorkHour+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VacationChallenge/VacationChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VLLH384AC4;
 				INFOPLIST_FILE = "$(SRCROOT)/VacationChallenge/Other/Info.plist";
@@ -525,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VacationChallenge/VacationChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VLLH384AC4;
 				INFOPLIST_FILE = "$(SRCROOT)/VacationChallenge/Other/Info.plist";

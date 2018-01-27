@@ -2,7 +2,7 @@
 //  WorkHour+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 09/01/18.
+//  Created by Guilherme Paciulli on 27/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -12,7 +12,7 @@ import CoreData
 
 
 extension WorkHour {
-    
+
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WorkHour> {
         return NSFetchRequest<WorkHour>(entityName: "WorkHour")
     }
@@ -24,6 +24,7 @@ extension WorkHour {
         workHour.started = NSDate()
         workHour.task = task
         DatabaseController.shared.saveContext()
+        CKManager.shared.create(entity: workHour)
         
         return workHour
     }
@@ -32,10 +33,12 @@ extension WorkHour {
         self.task?.hoursWorked -= self.hoursSpent
         self.hoursSpent = hour
         self.finished = Calendar.current.date(byAdding: .hour,
-                                                       value: Int(self.hoursSpent),
-                                                       to: self.finished! as Date)! as NSDate
+                                              value: Int(self.hoursSpent),
+                                              to: self.finished! as Date)! as NSDate
         self.task?.hoursWorked += self.hoursSpent
+        CKManager.shared.update(entity: self.task!)
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
     }
     
     public func stop() {
@@ -53,19 +56,27 @@ extension WorkHour {
         self.hoursSpent = Double(round(self.hoursSpent * 100) / 100)
         self.task?.hoursWorked += self.hoursSpent
         self.task?.hoursWorked = Double(round((self.task?.hoursWorked)! * 100) / 100)
+        CKManager.shared.update(entity: self.task!)
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
     }
     
     public func delete() {
-        self.task?.hoursWorked -= self.hoursSpent
-        DatabaseController.shared.saveContext()
+        let task = self.task!
+        task.hoursWorked -= self.hoursSpent
+        if let workHourRecordID = self.ckRecordId {
+            CKManager.shared.delete(workHourWith: workHourRecordID)
+        }
         DatabaseController.shared.persistentContainer.viewContext.delete(self)
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: task)
     }
-    
-    @NSManaged public var started: NSDate?
+
     @NSManaged public var finished: NSDate?
     @NSManaged public var hoursSpent: Double
+    @NSManaged public var started: NSDate?
+    @NSManaged public var ckRecordId: String?
+    @NSManaged public var cloudUpdated: Bool
     @NSManaged public var task: Task?
-    
+
 }

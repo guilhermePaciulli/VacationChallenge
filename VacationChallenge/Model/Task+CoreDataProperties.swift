@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 09/01/18.
+//  Created by Guilherme Paciulli on 27/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -17,12 +17,28 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Task")
     }
     
+    @nonobjc public class func fetchRequest(by ckRecordID: String) -> NSFetchRequest<Task> {
+        let request = NSFetchRequest<Task>(entityName: "Task")
+        request.predicate = NSPredicate(format: "ckRecordId = %@", ckRecordID)
+        return request
+    }
+    
     @nonobjc public class func fetchAll() -> [Task] {
         do {
             let entities = try DatabaseController.shared.persistentContainer.viewContext.fetch(self.fetchRequest())
             if let tasks = entities as? [Task] {
                 return tasks
             }
+        } catch {
+            fatalError("Failed to fetch tasks: \(error)")
+        }
+        return []
+    }
+    
+    @nonobjc public class func fetchBy(ckRecordId: String) -> [Task] {
+        do {
+            let entities = try DatabaseController.shared.persistentContainer.viewContext.fetch(self.fetchRequest(by: ckRecordId))
+            return entities as [Task]
         } catch {
             fatalError("Failed to fetch tasks: \(error)")
         }
@@ -38,8 +54,10 @@ extension Task {
             task.rating = -1
         }
         
+        CKManager.shared.create(entity: entity)
+        
         DatabaseController.shared.saveContext()
-
+        
     }
     
     public func start() {
@@ -89,12 +107,30 @@ extension Task {
         escaled = escaled < 0 ? 0 : escaled
         self.rating = Double(round(escaled * 100)) / 100
         DatabaseController.shared.saveContext()
+        CKManager.shared.update(entity: self)
+    }
+    
+    public func delete() {
+        if let workHours = (self.workHours?.array) as? [WorkHour] {
+            for workHour in workHours {
+                if let workHourRecordID = workHour.ckRecordId {
+                    CKManager.shared.delete(workHourWith: workHourRecordID)
+                }
+            }
+        }
+        if let taskRecordID = self.ckRecordId {
+            CKManager.shared.delete(taskWith: taskRecordID)
+        }
+        DatabaseController.shared.persistentContainer.viewContext.delete(self)
+        DatabaseController.shared.saveContext()
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var hoursDeadline: Double
-    @NSManaged public var rating: Double
     @NSManaged public var hoursWorked: Double
+    @NSManaged public var rating: Double
+    @NSManaged public var title: String?
+    @NSManaged public var ckRecordId: String?
+    @NSManaged public var cloudUpdated: Bool
     @NSManaged public var workHours: NSOrderedSet?
 
 }

@@ -18,6 +18,15 @@ class TasksTableViewController: UITableViewController {
     
     var sections: [Sections] = []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        CKManager.shared.pullFromCloud {
+            DispatchQueue.main.async {
+                self.reloadTasks()
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadTasks()
@@ -124,8 +133,7 @@ class TasksTableViewController: UITableViewController {
                 self.unbegunTasks.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-            DatabaseController.shared.persistentContainer.viewContext.delete(task)
-            DatabaseController.shared.saveContext()
+            task.delete()
             self.reloadTasks()
         }
     }
