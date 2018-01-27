@@ -20,16 +20,24 @@ class TasksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CKManager.shared.pullCloudToLocal {
-            DispatchQueue.main.async {
-                self.reloadTasks()
-            }
-        }
+        self.refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(pullDataFromCloud), for: .valueChanged)
+        self.tableView.addSubview(self.refreshControl!)
+        
+        self.pullDataFromCloud()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadTasks()
+    }
+    
+    @objc func pullDataFromCloud() {
+        CKManager.shared.pullFromCloud {
+            DispatchQueue.main.async {
+                self.reloadTasks()
+            }
+        }
     }
     
     func reloadTasks() {

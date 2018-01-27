@@ -2,7 +2,7 @@
 //  WorkHour+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 23/01/18.
+//  Created by Guilherme Paciulli on 27/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -71,6 +71,7 @@ extension WorkHour {
     @NSManaged public var hoursSpent: Double
     @NSManaged public var started: NSDate?
     @NSManaged public var ckRecordId: String?
+    @NSManaged public var cloudUpdated: Bool
     @NSManaged public var task: Task?
 
 }

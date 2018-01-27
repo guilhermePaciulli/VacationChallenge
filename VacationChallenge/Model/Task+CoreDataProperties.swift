@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  VacationChallenge
 //
-//  Created by Guilherme Paciulli on 23/01/18.
+//  Created by Guilherme Paciulli on 27/01/18.
 //  Copyright © 2018 Guilherme Paciulli. All rights reserved.
 //
 //
@@ -127,6 +127,7 @@ extension Task {
     @NSManaged public var rating: Double
     @NSManaged public var title: String?
     @NSManaged public var ckRecordId: String?
+    @NSManaged public var cloudUpdated: Bool
     @NSManaged public var workHours: NSOrderedSet?
 
 }

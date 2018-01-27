@@ -20,14 +20,34 @@ class CKManager {
     private let database: CKDatabase
     
     private let TaskRecordType = "Task"
+    
     private let WorkHourRecordType = "WorkHour"
+    
+    private let tasksToBeDeleted = "tasksToBeDeletedKey"
+    
+    private let workHoursToBeDeleted = "workHoursToBeDeletedKey"
     
     private init() {
         self.container = CKContainer.default()
         self.database = container.privateCloudDatabase
     }
     
-    public func pullCloudToLocal(completion: @escaping () -> (Void)) {
+    public func pushToCloud() {
+        for task in Task.fetchAll() {
+            if task.ckRecordId != nil {
+                if !task.cloudUpdated {
+                    self.update(entity: task)
+                }
+                (task.workHours?.array as? [WorkHour])?.filter({ !$0.cloudUpdated }).forEach({ self.update(entity: $0) })
+            } else {
+                self.create(task: task)
+            }
+        }
+        (UserDefaults.standard.array(forKey: self.tasksToBeDeleted) as? [String])?.forEach({ self.delete(taskWith: $0) })
+        (UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String])?.forEach({ self.delete(workHourWith: $0) })
+    }
+    
+    public func pullFromCloud(completion: @escaping () -> (Void)) {
         let query = CKQuery(recordType: self.TaskRecordType, predicate: NSPredicate(value: true))
         self.database.perform(query, inZoneWith: nil, completionHandler: { (taskRecords, error) in
             guard error == nil, let records = taskRecords else {
@@ -36,7 +56,7 @@ class CKManager {
             }
             var counter = records.count
             for taskRecord in records {
-                if let localTask = Task.fetchBy(ckRecordId: taskRecord.recordID.recordName).first {
+                if Task.fetchBy(ckRecordId: taskRecord.recordID.recordName).first != nil {
                     counter -= 1
                     if counter == 0 {
                         DatabaseController.shared.saveContext()
@@ -94,30 +114,6 @@ class CKManager {
         })
     }
     
-    private func compare(record: CKRecord, to task: Task) -> Bool {
-        if  let title = record[.title] as? String,
-            let hoursDeadline = record[.hoursDeadline] as? Double,
-            let rating = record[.rating] as? Double,
-            let hoursWorked = record[.hoursWorked] as? Double {
-            return title == task.title &&
-                hoursWorked == task.hoursWorked &&
-                rating == task.rating &&
-                hoursDeadline == task.hoursDeadline
-        }
-        return false
-    }
-    
-    private func compare(record: CKRecord, to workHour: WorkHour) -> Bool {
-        if  let started = record[.started] as? NSDate,
-            let finished = record[.finished] as? NSDate,
-            let hoursSpent = record[.hoursSpent] as? Double {
-            return started == workHour.started &&
-                finished == workHour.finished &&
-                hoursSpent == workHour.hoursSpent
-        }
-        return false
-    }
-    
     public func create(entity: NSManagedObject) {
         switch entity {
         case is Task:
@@ -140,6 +136,7 @@ class CKManager {
         self.database.save(taskRecord, completionHandler: { (record, error) in
             if error == nil {
                 task.ckRecordId = record?.recordID.recordName
+                task.cloudUpdated = true
                 DatabaseController.shared.saveContext()
             }
         })
@@ -163,6 +160,7 @@ class CKManager {
                     self.database.save(taskRecord!, completionHandler: { (_, err) in
                         if err == nil && error == nil {
                             workHour.ckRecordId = record?.recordID.recordName
+                            workHour.cloudUpdated = true
                             DatabaseController.shared.saveContext()
                         }
                     })
@@ -194,22 +192,80 @@ class CKManager {
     
     private func update(task: Task, recordName: String) {
         self.database.fetch(withRecordID: CKRecordID(recordName: recordName), completionHandler:{ (record, error) in
-            guard error == nil, let taskRecord = record else { return }
+            guard error == nil, let taskRecord = record else {
+                task.cloudUpdated = false
+                DatabaseController.shared.saveContext()
+                return
+            }
             taskRecord[.title] = task.title
             taskRecord[.rating] = task.rating
             taskRecord[.hoursDeadline] = task.hoursDeadline
             taskRecord[.hoursWorked] = task.hoursWorked
-            self.database.save(taskRecord, completionHandler: { (_, _) in })
+            self.database.save(taskRecord, completionHandler: { (_, error) in
+                if error != nil {
+                    task.cloudUpdated = false
+                    DatabaseController.shared.saveContext()
+                } else {
+                    task.cloudUpdated = true
+                    DatabaseController.shared.saveContext()
+                }
+            })
         })
     }
     
     private func update(workHour: WorkHour, recordName: String) {
         self.database.fetch(withRecordID: CKRecordID(recordName: recordName), completionHandler:{ (record, error) in
-            guard error == nil, let workHourRecord = record else { return }
+            guard error == nil, let workHourRecord = record else {
+                workHour.cloudUpdated = false
+                DatabaseController.shared.saveContext()
+                return
+            }
             workHourRecord[.started] = workHour.started
             workHourRecord[.finished] = workHour.finished
             workHourRecord[.hoursSpent] = workHour.hoursSpent
-            self.database.save(workHourRecord, completionHandler: { (_, _) in })
+            self.database.save(workHourRecord, completionHandler: { (_, error) in
+                if error != nil {
+                    workHour.cloudUpdated = false
+                    DatabaseController.shared.saveContext()
+                } else {
+                    workHour.cloudUpdated = true
+                    DatabaseController.shared.saveContext()
+                }
+            })
+        })
+    }
+    
+    private func delete(taskWith ckRecordID: String) {
+        self.database.delete(withRecordID: CKRecordID(recordName: ckRecordID), completionHandler: { (_, error) in
+            if error != nil {
+                if var toBeDeleted = UserDefaults.standard.array(forKey: self.tasksToBeDeleted) as? [String] {
+                    toBeDeleted.append(ckRecordID)
+                    UserDefaults.standard.set(toBeDeleted, forKey: self.tasksToBeDeleted)
+                } else {
+                    UserDefaults.standard.set([ckRecordID], forKey: self.tasksToBeDeleted)
+                }
+            } else {
+                if let toBeDeleted = UserDefaults.standard.array(forKey: self.tasksToBeDeleted) as? [String] {
+                    UserDefaults.standard.set(toBeDeleted.filter({ $0 != ckRecordID }), forKey: self.tasksToBeDeleted)
+                }
+            }
+        })
+    }
+    
+    private func delete(workHourWith ckRecordID: String) {
+        self.database.delete(withRecordID: CKRecordID(recordName: ckRecordID), completionHandler: { (_, error) in
+            if error != nil {
+                if var toBeDeleted = UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String] {
+                    toBeDeleted.append(ckRecordID)
+                    UserDefaults.standard.set(toBeDeleted, forKey: self.workHoursToBeDeleted)
+                } else {
+                    UserDefaults.standard.set([ckRecordID], forKey: self.workHoursToBeDeleted)
+                }
+            } else {
+                if let toBeDeleted = UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String] {
+                    UserDefaults.standard.set(toBeDeleted.filter({ $0 != ckRecordID }), forKey: self.workHoursToBeDeleted)
+                }
+            }
         })
     }
     
@@ -218,12 +274,12 @@ class CKManager {
         case is Task:
             let task = entity as! Task
             if let recordName = task.ckRecordId {
-                self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
+                self.delete(taskWith: recordName)
             }
         case is WorkHour:
             let workHour = entity as! WorkHour
             if let recordName = workHour.ckRecordId {
-                self.database.delete(withRecordID: CKRecordID(recordName: recordName), completionHandler: { (_, _) in })
+                self.delete(workHourWith: recordName)
             }
         default:
             break
