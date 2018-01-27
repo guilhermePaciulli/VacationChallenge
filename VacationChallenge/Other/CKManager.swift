@@ -83,7 +83,7 @@ class CKManager {
                                         }
                                         return
                                     }
-                                        
+                                    
                                     if let workHour = NSEntityDescription.insertNewObject(forEntityName: "WorkHour", into: DatabaseController.shared.persistentContainer.viewContext) as? WorkHour {
                                         workHour.started = workHourRecord[.started] as? NSDate
                                         workHour.finished = workHourRecord[.finished] as? NSDate
@@ -150,7 +150,7 @@ class CKManager {
         
         if let taskCKRecordID = workHour.task?.ckRecordId {
             self.database.fetch(withRecordID: CKRecordID(recordName: taskCKRecordID), completionHandler: { (taskRecord, error) in
-                workHourRecord[.task] = CKReference(record: taskRecord!, action: .none)
+                workHourRecord[.task] = CKReference(record: taskRecord!, action: .deleteSelf)
                 self.database.save(workHourRecord, completionHandler: { (record, error) in
                     
                     var workHourReference: [CKReference] = (taskRecord![.workHours] as? [CKReference]) ?? []
@@ -253,18 +253,18 @@ class CKManager {
         })
     }
     
-    public func delete(workHourWith ckRecordID: String) {
-        self.database.delete(withRecordID: CKRecordID(recordName: ckRecordID), completionHandler: { (_, error) in
+    public func delete(workHourWith workHourCKRecordID: String) {
+        self.database.delete(withRecordID: CKRecordID(recordName: workHourCKRecordID), completionHandler: { (_, error) in
             if error != nil {
                 if var toBeDeleted = UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String] {
-                    toBeDeleted.append(ckRecordID)
+                    toBeDeleted.append(workHourCKRecordID)
                     UserDefaults.standard.set(toBeDeleted, forKey: self.workHoursToBeDeleted)
                 } else {
-                    UserDefaults.standard.set([ckRecordID], forKey: self.workHoursToBeDeleted)
+                    UserDefaults.standard.set([workHourCKRecordID], forKey: self.workHoursToBeDeleted)
                 }
             } else {
                 if let toBeDeleted = UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String] {
-                    UserDefaults.standard.set(toBeDeleted.filter({ $0 != ckRecordID }), forKey: self.workHoursToBeDeleted)
+                    UserDefaults.standard.set(toBeDeleted.filter({ $0 != workHourCKRecordID }), forKey: self.workHoursToBeDeleted)
                 }
             }
         })
