@@ -18,13 +18,15 @@ class TasksTableViewController: UITableViewController {
     
     var sections: [Sections] = []
     
+    var isFirstTimeLoading = true
+    
+    var isRefreshing = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(pullDataFromCloud), for: .valueChanged)
         self.tableView.addSubview(self.refreshControl!)
-        
-        self.pullDataFromCloud()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,10 +34,24 @@ class TasksTableViewController: UITableViewController {
         self.reloadTasks()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstTimeLoading {
+            self.pullDataFromCloud()
+            isFirstTimeLoading = false
+        }
+    }
+    
     @objc func pullDataFromCloud() {
-        CKManager.shared.pullFromCloud {
-            DispatchQueue.main.async {
-                self.reloadTasks()
+        if !isRefreshing {
+            isRefreshing = true
+            self.refreshControl?.beginRefreshing()
+            CKManager.shared.pullFromCloud {
+                DispatchQueue.main.async {
+                    self.reloadTasks()
+                    self.refreshControl?.endRefreshing()
+                    self.isRefreshing = false
+                }
             }
         }
     }

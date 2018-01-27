@@ -35,10 +35,8 @@ class CKManager {
     public func pushToCloud() {
         for task in Task.fetchAll() {
             if task.ckRecordId != nil {
-                if !task.cloudUpdated {
-                    self.update(entity: task)
-                }
-                (task.workHours?.array as? [WorkHour])?.filter({ !$0.cloudUpdated }).forEach({ self.update(entity: $0) })
+                if !task.cloudUpdated { self.update(entity: task) }
+                (task.workHours?.array as? [WorkHour])?.forEach({ if !$0.cloudUpdated { self.update(entity: $0) } })
             } else {
                 self.create(task: task)
             }
@@ -72,6 +70,7 @@ class CKManager {
                         task.rating = rating
                         task.hoursWorked = hoursWorked
                         task.ckRecordId = taskRecord.recordID.recordName
+                        task.cloudUpdated = true
                         
                         if let references = taskRecord[.workHours] as? [CKReference] {
                             for ref in references {
@@ -88,6 +87,7 @@ class CKManager {
                                     if let workHour = NSEntityDescription.insertNewObject(forEntityName: "WorkHour", into: DatabaseController.shared.persistentContainer.viewContext) as? WorkHour {
                                         workHour.started = workHourRecord[.started] as? NSDate
                                         workHour.finished = workHourRecord[.finished] as? NSDate
+                                        workHour.cloudUpdated = true
                                         if let hoursSpent = workHourRecord[.hoursSpent] as? Double {
                                             workHour.hoursSpent = hoursSpent
                                         }
