@@ -113,12 +113,15 @@ extension Task {
     public func delete() {
         if let workHours = (self.workHours?.array) as? [WorkHour] {
             for workHour in workHours {
-                DatabaseController.shared.persistentContainer.viewContext.delete(workHour)
-                CKManager.shared.delete(entity: workHour)
+                if let workHourRecordID = workHour.ckRecordId {
+                    CKManager.shared.delete(workHourWith: workHourRecordID)
+                }
             }
         }
+        if let taskRecordID = self.ckRecordId {
+            CKManager.shared.delete(taskWith: taskRecordID)
+        }
         DatabaseController.shared.persistentContainer.viewContext.delete(self)
-        CKManager.shared.delete(entity: self)
         DatabaseController.shared.saveContext()
     }
 

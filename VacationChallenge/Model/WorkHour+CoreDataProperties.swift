@@ -62,12 +62,14 @@ extension WorkHour {
     }
     
     public func delete() {
-        self.task?.hoursWorked -= self.hoursSpent
-        DatabaseController.shared.saveContext()
-        CKManager.shared.update(entity: self.task!)
+        let task = self.task!
+        task.hoursWorked -= self.hoursSpent
+        if let workHourRecordID = self.ckRecordId {
+            CKManager.shared.delete(workHourWith: workHourRecordID)
+        }
         DatabaseController.shared.persistentContainer.viewContext.delete(self)
         DatabaseController.shared.saveContext()
-        CKManager.shared.delete(entity: self)
+        CKManager.shared.update(entity: task)
     }
 
     @NSManaged public var finished: NSDate?

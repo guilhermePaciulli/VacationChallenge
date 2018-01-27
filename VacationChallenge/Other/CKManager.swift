@@ -150,7 +150,7 @@ class CKManager {
         
         if let taskCKRecordID = workHour.task?.ckRecordId {
             self.database.fetch(withRecordID: CKRecordID(recordName: taskCKRecordID), completionHandler: { (taskRecord, error) in
-                workHourRecord[.task] = CKReference(record: taskRecord!, action: .deleteSelf)
+                workHourRecord[.task] = CKReference(record: taskRecord!, action: .none)
                 self.database.save(workHourRecord, completionHandler: { (record, error) in
                     
                     var workHourReference: [CKReference] = (taskRecord![.workHours] as? [CKReference]) ?? []
@@ -201,6 +201,7 @@ class CKManager {
             taskRecord[.rating] = task.rating
             taskRecord[.hoursDeadline] = task.hoursDeadline
             taskRecord[.hoursWorked] = task.hoursWorked
+            
             self.database.save(taskRecord, completionHandler: { (_, error) in
                 if error != nil {
                     task.cloudUpdated = false
@@ -235,7 +236,7 @@ class CKManager {
         })
     }
     
-    private func delete(taskWith ckRecordID: String) {
+    public func delete(taskWith ckRecordID: String) {
         self.database.delete(withRecordID: CKRecordID(recordName: ckRecordID), completionHandler: { (_, error) in
             if error != nil {
                 if var toBeDeleted = UserDefaults.standard.array(forKey: self.tasksToBeDeleted) as? [String] {
@@ -252,7 +253,7 @@ class CKManager {
         })
     }
     
-    private func delete(workHourWith ckRecordID: String) {
+    public func delete(workHourWith ckRecordID: String) {
         self.database.delete(withRecordID: CKRecordID(recordName: ckRecordID), completionHandler: { (_, error) in
             if error != nil {
                 if var toBeDeleted = UserDefaults.standard.array(forKey: self.workHoursToBeDeleted) as? [String] {
@@ -267,23 +268,6 @@ class CKManager {
                 }
             }
         })
-    }
-    
-    public func delete(entity: NSManagedObject) {
-        switch entity {
-        case is Task:
-            let task = entity as! Task
-            if let recordName = task.ckRecordId {
-                self.delete(taskWith: recordName)
-            }
-        case is WorkHour:
-            let workHour = entity as! WorkHour
-            if let recordName = workHour.ckRecordId {
-                self.delete(workHourWith: recordName)
-            }
-        default:
-            break
-        }
     }
     
 }
